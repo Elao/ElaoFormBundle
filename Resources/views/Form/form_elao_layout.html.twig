@@ -1,0 +1,7 @@
+{% extends "form_div_layout.html.twig" %}
+
+{% block form_start %}
+	{% set form_class = form_class|default('form') %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ form_class)|trim  }) %}
+    {{ parent() }}
+{% endblock form_start %}

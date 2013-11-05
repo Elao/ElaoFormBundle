@@ -1,0 +1,6 @@
+{% extends "ElaoFormBundle:Form:form_elao_layout.html.twig" %}
+
+{% block form_start %}
+	{% set form_class = form_class|default(horizontal|default(false) ? 'form-horizontal' : inline|default(false) ? 'form-inline' : 'form') %}
+    {{ parent() }}
+{% endblock form_start %}
