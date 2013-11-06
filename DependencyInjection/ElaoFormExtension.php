@@ -25,44 +25,12 @@ class ElaoFormExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $formLayout = self::getFormLayout($config['form_layout']);
-
-        if ($formLayout) {
-
-            // @todo Find a way to make sure the template exists: $container->get('templating')->exists($formLayout);
-            
-            $container->setParameter(
-                'twig.form.resources', 
-                array_merge(
-                    $container->getParameter('twig.form.resources'),
-                    (array) $formLayout
-                )
-            );
-        }
-    }
-
-    /**
-     * Get form layout form the config value
-     * 
-     * @param string $value The given configuration value
-     * 
-     * @return string       The form layout that should be used
-     */
-    private static function getFormLayout($value)
-    {
-        if (!$value) {
-            return false;
-        }
-
-        switch ($value) {
-            case 'twitter-bootstrap-3':
-                return 'ElaoFormBundle:Form:form_bootstrap3_layout.html.twig';
-
-            case 'elao':
-                return 'ElaoFormBundle:Form:form_elao_layout.html.twig';
-            
-            default:
-                return $value;
-        }
+        $container->setParameter(
+            'twig.form.resources',
+            array_merge(
+                $container->getParameter('twig.form.resources'),
+                array('ElaoFormBundle:Form:form_elao_layout.html.twig')
+            )
+        );
     }
 }

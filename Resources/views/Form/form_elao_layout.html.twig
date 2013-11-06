@@ -35,7 +35,7 @@
 {% spaceless %}
 	{% set group_id = group_id|default(id ~ '-group') %}
 	{% set group_attr = group_attr|default({}) %}
-    
+
     {% if not compound or expanded|default(false) %}
     	{% set group_class = group_class|default('group') %}
 	    {% set group_attr = group_attr|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_class)|trim }) %}
