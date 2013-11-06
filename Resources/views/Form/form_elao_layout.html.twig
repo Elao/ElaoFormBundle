@@ -5,3 +5,96 @@
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ form_class)|trim  }) %}
     {{ parent() }}
 {% endblock form_start %}
+
+{% block form_row %}
+{% spaceless %}
+	{% set widget = widget|default('default') %}
+	{% set help = help|default(false) %}
+	{% set help_position = help_position|default('bottom') %}
+
+    {% if widget == 'hidden' %}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    {% else %}
+        <div {{ block('group_attributes') }}>
+            {% if label is not sameas(false) %}
+                {{ form_label(form, label) }}
+            {% endif %}
+            {{ help and help_position == 'top' ? block('form_help') : '' }}
+            {{ form_errors(form) }}
+            {{ form_widget(form) }}
+            {{ help and help_position == 'bottom' ? block('form_help') : '' }}
+
+            {{ block('collection_delete_button') }}
+        </div>
+    {% endif %}
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block group_attributes %}
+{% spaceless %}
+	{% set group_id = group_id|default(id ~ '-group') %}
+	{% set group_attr = group_attr|default({}) %}
+    
+    {% if not compound or expanded|default(false) %}
+    	{% set group_class = group_class|default('group') %}
+	    {% set group_attr = group_attr|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_class)|trim }) %}
+    {% endif %}
+
+	{% if errors|length > 0 %}
+    	{% set group_error_class = group_error_class|default('errors') %}
+	    {% set group_attr = group_attr|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_error_class)|trim }) %}
+    {% endif %}
+
+    {% if group_id %}id="{{ group_id }}"{% endif %}
+	{% for attrname, attrvalue in group_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+{% endspaceless %}
+{% endblock %}
+
+{% block form_help %}
+	{% if help|default(false) %}
+	    <p class="{{ help_class|default('help') }}">
+	        {{ help|trans({}, translation_domain) }}
+	    </p>
+	{% endif %}
+{% endblock %}
+
+{% block collection_delete_button %}
+	{% if form.parent.vars.allow_delete|default(false) %}
+		{# @todo: remove btn #}
+	{% endif %}
+{% endblock collection_delete_button %}
+
+{% block form_widget %}
+{% spaceless %}
+    {% if not compound or expanded|default(true) is sameas(false) %}
+		{% set control_class = control_class|default('input') %}
+	    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
+    {% endif %}
+	{{ parent() }}
+{% endspaceless %}
+{% endblock form_widget %}
+
+{% block form_widget_simple %}
+{% spaceless %}
+	{% set control_class = control_class|default('input') %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
+	{{ parent() }}
+{% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block textarea_widget %}
+{% spaceless %}
+	{% set control_class = control_class|default('input') %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
+	{{ parent() }}
+{% endspaceless %}
+{% endblock textarea_widget %}
+
+{% block choice_widget_collapsed %}
+{% spaceless %}
+	{% set control_class = control_class|default('input') %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
+	{{ parent() }}
+{% endspaceless %}
+{% endblock choice_widget_collapsed %}
