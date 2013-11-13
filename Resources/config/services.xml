@@ -4,17 +4,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <parameters>
-        <parameter key="acme_test.example.class">Acme\Bundle\TestBundle\Example</parameter>
+        <parameter key="elao.form.tree_builder.class">Elao\Bundle\FormBundle\Service\FormTreeBuilder</parameter>
+        <parameter key="elao.form.extension.form_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\FormTypeExtension</parameter>
     </parameters>
 
     <services>
-        <service id="acme_test.example" class="%acme_test.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <!-- Service -->
+        <service id="elao.form.tree_builder" class="%elao.form.tree_builder.class%" />
+
+        <!-- Form Extension -->
+        <service id="elao.form.extension.form_type_extension" class="%elao.form.extension.form_type_extension.class%">
+            <argument type="service" id="elao.form.tree_builder" on-invalid="ignore" />
+            <tag name="form.type_extension" alias="form" />
         </service>
     </services>
-    -->
 </container>
