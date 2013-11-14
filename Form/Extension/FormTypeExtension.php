@@ -44,7 +44,7 @@ class FormTypeExtension extends AbstractTypeExtension
     {
         if ($view->vars['label'] !== false && $this->treeBuilder) {
             // @todo: Splite the logic in two distinct services: TreeBuilder and LabelBuilder
-            $view->vars['label'] = 'form.'.implode('.', $this->treeBuilder->buildTree($view));
+            $view->vars['label'] = implode('.', $this->treeBuilder->buildTree($view));
         }
     }
 }

@@ -9,50 +9,50 @@ use Symfony\Component\Form\FormView;
  */
 class FormTreeBuilder
 {
-	/**
-	 * Form type with no children labels
-	 * 
-	 * @var array
-	 */
-	private $noChildren = array('date', 'time', 'datetime');
+    /**
+     * Form type with no children labels
+     *
+     * @var array
+     */
+    private $noChildren = array('date', 'time', 'datetime', 'choice');
 
-	/**
-	 * Key for the label node in the tree
-	 * 
-	 * @var string
-	 */
-	private $labelKey = "label";
+    /**
+     * Key for the label node in the tree
+     *
+     * @var string
+     */
+    private $labelKey = "label";
 
-	/**
-	 * Key for the children node in the tree
-	 * 
-	 * @var string
-	 */
-	private $childrenKey = "children";
+    /**
+     * Key for the children node in the tree
+     *
+     * @var string
+     */
+    private $childrenKey = "children";
 
-	/**
-	 * Build the given form a tree
-	 * 
-	 * @param FormView $view 
-	 */
+    /**
+     * Build the given form a tree
+     *
+     * @param FormView $view
+     */
     public function buildTree(FormView &$view)
     {
     	return array_merge(
-    		$this->getTree($view),
-    		$this->getLabel($view)
+            $this->getTree($view),
+            $this->getLabel($view)
     	);
     }
 
     private function getTree(FormView &$view)
     {
     	if ($view->parent === null || $view->vars['label']) {
-    		return array();
+            return array();
     	}
 
-		$tree = array_merge(
-			$this->getTree($view->parent),
-			$this->getChildPrefix($view->parent)
-		);
+        $tree = array_merge(
+            $this->getTree($view->parent),
+            $this->getChildPrefix($view->parent)
+        );
 
     	return $tree;
     }
@@ -69,18 +69,18 @@ class FormTreeBuilder
     }
 
     /**
-     * Get the name of the 
+     * Get the name of the
      * @param  FormView $view [description]
      * @return [type]         [description]
      */
     private function getLabel(FormView $view)
     {
     	$name = array(
-    		 $view->vars[$this->labelKey] ?: $view->vars['name']
+            $view->vars[$this->labelKey] ?: $view->vars['name']
     	);
 
     	if ($this->hasChildrenWithLabel($view)) {
-    		$name[] = $this->labelKey;
+            $name[] = $this->labelKey;
     	}
 
     	return $name;
@@ -88,20 +88,20 @@ class FormTreeBuilder
 
     /**
      * Test if the given form view has children with labels
-     * 
-     * @param FormView $view 
-     * @return boolean        
+     *
+     * @param FormView $view
+     * @return boolean
      */
     private function hasChildrenWithLabel(FormView $view)
     {
     	if ($view->parent === null || !$view->vars['compound']) {
-    		return false;
+            return false;
     	}
 
     	foreach ($view->vars['block_prefixes'] as $prefix) {
-    		if (in_array($prefix, $this->noChildren)) {
-    			return false;
-    		}
+            if (in_array($prefix, $this->noChildren)) {
+                return false;
+            }
     	}
 
     	return true;
