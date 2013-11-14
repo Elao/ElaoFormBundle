@@ -12,14 +12,14 @@ class FormTypeExtension extends AbstractTypeExtension
 {
     /**
      * Form Tree treeBuilder
-     * 
+     *
      * @var FormTreebuilder
      */
     protected $treeBuilder;
 
     /**
      * Constructor
-     * 
+     *
      * @param FormTreebuilder $treeBuilder
      */
     public function __construct(FormTreebuilder $treeBuilder = null)
@@ -44,7 +44,7 @@ class FormTypeExtension extends AbstractTypeExtension
     {
         if ($view->vars['label'] !== false && $this->treeBuilder) {
             // @todo: Splite the logic in two distinct services: TreeBuilder and LabelBuilder
-            $view->vars['label'] = implode('.', $this->treeBuilder->buildTree($view));
+            $view->vars['label'] = 'form.'.implode('.', $this->treeBuilder->buildTree($view));
         }
     }
 }
