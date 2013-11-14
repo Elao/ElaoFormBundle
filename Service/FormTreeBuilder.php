@@ -3,6 +3,8 @@
 namespace Elao\Bundle\FormBundle\Service;
 
 use Symfony\Component\Form\FormView;
+use Elao\Bundle\FormBundle\Model\FormTree;
+use Elao\Bundle\FormBundle\Model\FormTreeNode;
 
 /**
  * Responsible form building tree for forms.
@@ -17,73 +19,46 @@ class FormTreeBuilder
     private $noChildren = array('date', 'time', 'datetime', 'choice');
 
     /**
-     * Key for the label node in the tree
-     *
-     * @var string
+     * Get the full tree for a given view
+     * 
+     * @param  FormView $view 
+     * @return array         
      */
-    private $labelKey = "label";
-
-    /**
-     * Key for the children node in the tree
-     *
-     * @var string
-     */
-    private $childrenKey = "children";
-
-    /**
-     * Build the given form a tree
-     *
-     * @param FormView $view
-     */
-    public function buildTree(FormView &$view)
+    public function getTree(FormView $view)
     {
-    	return array_merge(
-            $this->getTree($view),
-            $this->getLabel($view)
-    	);
-    }
+        if ($view->parent !== null) {
+            $tree = $this->getTree($view->parent);
+        } else {
+            $tree = new FormTree;
+        }
 
-    private function getTree(FormView &$view)
-    {
-    	if ($view->parent === null || $view->vars['label']) {
-            return array();
-    	}
-
-        $tree = array_merge(
-            $this->getTree($view->parent),
-            $this->getChildPrefix($view->parent)
-        );
+        $tree->addChild($this->createNodeFromView($view));
 
     	return $tree;
     }
 
-    private function getChildPrefix(FormView $view)
+    /**
+     * Set form type that should not be treated as having children
+     * 
+     * @param array $types
+     */
+    public function setNoChildren(array $types)
     {
-    	$prefix = array($view->vars['label'] ?: $view->vars['name']);
-
-    	if ($this->hasChildrenWithLabel($view)) {
-    		$prefix[] = $this->childrenKey;
-    	}
-
-    	return $prefix;
+        $this->noChildren = $types;
     }
 
     /**
-     * Get the name of the
-     * @param  FormView $view [description]
-     * @return [type]         [description]
+     * Create a FormTreeNode for the given view
+     * 
+     * @param  FormView $view 
+     * @return FormTreeNode         
      */
-    private function getLabel(FormView $view)
+    private function createNodeFromView(FormView $view)
     {
-    	$name = array(
-            $view->vars[$this->labelKey] ?: $view->vars['name']
-    	);
-
-    	if ($this->hasChildrenWithLabel($view)) {
-            $name[] = $this->labelKey;
-    	}
-
-    	return $name;
+        return new FormTreeNode(
+            $view->vars['name'],
+            $this->hasChildrenWithLabel($view)
+        );
     }
 
     /**

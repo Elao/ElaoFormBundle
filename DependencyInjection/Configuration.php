@@ -22,24 +22,60 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->enumNode('form_layout')
-                    ->defaultValue('twitter-bootstrap-3')
-                    ->values(
-                        array(
-                            'twitter-bootstrap-3',
-                            'elao',
-                            false
-                        )
-                    )
-                    ->info('<info>What layout should be used to render forms?</info>')
-                    ->example('
-                        Can be any of these:
-                        - <comment>twitter-bootstrap-3</comment>: The provided Twitter Bootstrap 3 layout (extends the elao layout)
-                        - <comment>elao</comment>: The provided default layout
-                        - <comment>false</comment>: To use neither of these (and fallback to the twig configuration)')
-                ->end()
+                ->append($this->addTreeNode())
             ->end();
 
         return $treeBuilder;
+    }
+
+    /**
+     * Add the Tree related config section
+     */
+    public function addTreeNode()
+    {
+        $treeBuilder = new TreeBuilder();
+        $treeNode    = $treeBuilder->root('tree');
+
+        $treeNode
+            ->info('<info>Activate the Form Tree component (used to generate label translation keys)</info>')
+            ->canBeDisabled()
+            ->children()
+                ->booleanNode('auto_generate_label')
+                    ->info('<info>Generate translation keys for all missing labels</info>')
+                    ->defaultFalse()
+                ->end()
+                ->arrayNode('keys')
+                    ->info('<info>Customize available keys</info>')          
+                    ->useAttributeAsKey('key')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('value')
+                                ->isRequired()
+                            ->end()
+                        ->end()
+                    ->end()
+                    ->defaultValue(array('label' => "label", 'help' => "help"))
+                ->end()
+                ->arrayNode('blocks')
+                    ->info('<info>Customize the ways keys are built</info>')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('children')
+                            ->defaultValue('children')
+                            ->info('Prefix for children nodes')
+                        ->end()
+                        ->scalarNode('root')
+                            ->defaultValue('form')
+                            ->info('Prefix at the root of the key')
+                        ->end()
+                        ->scalarNode('separator')
+                            ->defaultValue('.')
+                            ->info('Separator te be used between nodes')
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+
+        return $treeNode;
     }
 }

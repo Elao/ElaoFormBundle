@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="elao.form.tree_builder.class">Elao\Bundle\FormBundle\Service\FormTreeBuilder</parameter>
+        <parameter key="elao.form.key_builder.class">Elao\Bundle\FormBundle\Service\FormKeyBuilder</parameter>
+    </parameters>
+
+    <services>
+        <!-- Service -->
+        <service id="elao.form.tree_builder" class="%elao.form.tree_builder.class%" />
+        <service id="elao.form.key_builder" class="%elao.form.key_builder.class%" />
+    </services>
+</container>
