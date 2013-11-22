@@ -22,7 +22,7 @@
         {% if label is not sameas(false) %}
             {{ form_label(form, label) }}
         {% endif %}
-        
+
         {% if control_group|default(false) %}
             <div {{ block('control_group_attributes') }}>
         {% endif %}
@@ -49,23 +49,20 @@
 
 {% block row_container_attributes %}
 {% spaceless %}
-	{% set group_id = group_id|default(id ~ '-group') %}
-	{% set group_attr = group_attr|default({}) %}
-
-    {#% if not compound or expanded|default(false) %#}
-    	{% set group_class = group_class|default('group') %}
-	    {% set group_attr = group_attr|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_class)|trim }) %}
-    {#% endif %#}
+    {% set group_class = group_class|default('group') %}
+    {% set group_attr  = group_attr|default({})|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_class)|trim }) %}
 
 	{% if errors|length > 0 %}
-    	{% set group_error_class = group_error_class|default('errors') %}
-	    {% set group_attr = group_attr|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_error_class)|trim }) %}
+        {% set group_error_class = group_error_class|default('errors') %}
+        {% set group_attr        = group_attr|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_error_class)|trim }) %}
     {% endif %}
 
-    {% if group_id %}id="{{ group_id }}"{% endif %}
+    id="{{ block('group_id') }}"
 	{% for attrname, attrvalue in group_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
 {% endspaceless %}
 {% endblock %}
+
+{% block group_id id ~ '-group' %}
 
 {% block control_group_attributes %}
 {% spaceless %}
@@ -78,7 +75,7 @@
 {% block form_label %}
 {% spaceless %}
     {% set label_class = label_class|default('label') %}
-    {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
+    {% set label_attr  = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
     {{ parent() }}
 {% endspaceless %}
 {% endblock form_label %}
@@ -131,8 +128,68 @@
 
 {# Collections #}
 
-{% block collection_delete_button %}
-    {% if form.parent.vars.allow_delete|default(false) %}
-        {# @todo: remove btn #}
+{% block collection_widget %}
+{% spaceless %}
+    {% if prototype is defined %}
+        {% set collection_class = collection_class|default('collection') %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ collection_class)|trim }) %}
+        {% set attr = attr|merge({'data-collection': prototype.vars.name }) %}
+        {% if allow_add|default(false) %}
+            {% set attr = attr|merge({'data-add': block('collection_add_button_id') }) %}
+        {% endif %}
+        {% if allow_delete|default(false) %}
+            {% set colection_delete_suffix = id %}
+            {% set attr = attr|merge({'data-delete': block('collection_delete_button_class') }) %}
+        {% endif %}
     {% endif %}
+
+    {{ parent() }}
+
+    {{ block('collection_add_button') }}
+{% endspaceless %}
+{% endblock collection_widget %}
+
+{% block collection_add_button %}
+{% spaceless %}
+    {% if allow_add|default(false) %}
+        {% set button_function = 'add' %}
+        {{ block('collection_button') }}
+    {% endif %}
+{% endspaceless %}
+{% endblock collection_add_button %}
+
+{% block collection_delete_button %}
+{% spaceless %}
+    {% if form.parent.vars.allow_delete|default(false) %}
+        {% set button_function = 'delete' %}
+        {% set colection_delete_suffix = form.parent.vars.id %}
+        {% set button_attr = button_attr|default({})|merge({'data-delete': block('group_id')}) %}
+        {% set button_attr = button_attr|merge({'class': (button_attr.class|default('') ~ ' ' ~ block('collection_delete_button_class'))|trim }) %}
+        {{ block('collection_button') }}
+    {% endif %}
+{% endspaceless %}
 {% endblock collection_delete_button %}
+
+{% block collection_button %}
+{% spaceless %}
+    {% set button_class = button_class|default(button_function) %}
+    {% set button_attr = button_attr|default({})|merge({'class': (button_attr.class|default('') ~ ' ' ~ button_class)|trim }) %}
+    {% set button_label = button_label|default(button_function|humanize) %}
+
+    <button {{ block('collection_button_attributes') }}>
+        {{ button_label|trans(button_label_parameters|default({}), translation_domain)|raw }}
+    </button>
+{% endspaceless %}
+{% endblock collection_button %}
+
+{% block collection_button_attributes %}
+{% spaceless %}
+    type="button"
+    id="{{ block('collection_' ~ button_function ~ '_button_id') }}"
+    {% for attrname, attrvalue in button_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+{% endspaceless %}
+{% endblock collection_button_attributes %}
+
+{% block collection_add_button_id id ~ '_add' %}
+{% block collection_delete_button_id id ~ '_delete' %}
+{% block collection_delete_button_class colection_delete_suffix ~ '_delete' %}
