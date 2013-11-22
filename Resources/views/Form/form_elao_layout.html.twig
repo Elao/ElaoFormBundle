@@ -153,6 +153,9 @@
 {% spaceless %}
     {% if allow_add|default(false) %}
         {% set button_function = 'add' %}
+        {% if label_add is defined %}
+        {% set button_label = label_add %}
+        {% endif %}
         {{ block('collection_button') }}
     {% endif %}
 {% endspaceless %}
@@ -165,6 +168,9 @@
         {% set colection_delete_suffix = form.parent.vars.id %}
         {% set button_attr = button_attr|default({})|merge({'data-delete': block('group_id')}) %}
         {% set button_attr = button_attr|merge({'class': (button_attr.class|default('') ~ ' ' ~ block('collection_delete_button_class'))|trim }) %}
+        {% if form.parent.vars.label_delete is defined %}
+        {% set button_label = form.parent.vars.label_delete %}
+        {% endif %}
         {{ block('collection_button') }}
     {% endif %}
 {% endspaceless %}

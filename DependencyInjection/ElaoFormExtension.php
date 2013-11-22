@@ -60,8 +60,14 @@ class ElaoFormExtension extends Extension
 
             /* Set up the Form extension */
             $formExtension = $container->getDefinition('elao.form.extension.form_type_extension');
-            $formExtension->addMethodCall('setAutoGenerateLabel', array($config['auto_generate_label']));
-            $formExtension->addMethodCall('setKeys', array($config['keys']));
+            $formExtension->addMethodCall('setAutoGenerate', array($config['auto_generate']));
+            $formExtension->addMethodCall('setKeys', array($config['keys']['form']));
+            $formExtension->addMethodCall('setTreebuilder', array(new Reference(self::TREE_BUILDER)));
+            $formExtension->addMethodCall('setKeybuilder', array(new Reference(self::KEY_BUILDER)));
+
+            $formExtension = $container->getDefinition('elao.form.extension.collection_type_extension');
+            $formExtension->addMethodCall('setAutoGenerate', array($config['auto_generate']));
+            $formExtension->addMethodCall('setKeys', array($config['keys']['collection']));
             $formExtension->addMethodCall('setTreebuilder', array(new Reference(self::TREE_BUILDER)));
             $formExtension->addMethodCall('setKeybuilder', array(new Reference(self::KEY_BUILDER)));
         }

@@ -6,12 +6,17 @@
 
     <parameters>
         <parameter key="elao.form.extension.form_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\FormTypeExtension</parameter>
+        <parameter key="elao.form.extension.collection_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\CollectionTypeExtension</parameter>
     </parameters>
 
     <services>
         <!-- Form Extension -->
         <service id="elao.form.extension.form_type_extension" class="%elao.form.extension.form_type_extension.class%">
             <tag name="form.type_extension" alias="form" />
+        </service>
+
+        <service id="elao.form.extension.collection_type_extension" class="%elao.form.extension.collection_type_extension.class%">
+            <tag name="form.type_extension" alias="collection" />
         </service>
     </services>
 </container>
