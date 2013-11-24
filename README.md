@@ -20,16 +20,16 @@ The way keys are built can be customized to suit your needs:
 			blocks:
 	            # Prefix for children nodes
 	            children: 	"children"
-	            
+
 	            # Prefix at the root of the key
 	            root: 		"form"
 
 	            # Separator te be used between nodes
-	            separator: 	"."    
+	            separator: 	"."
 
 #### Labels
 
-If you set the for the "label" option of a form field to __true__, a key will be generated and set as the field label. 
+If you set the for the "label" option of a form field to __true__, a key will be generated and set as the field label.
 
 __Otherwise: We don't touch your label!__
 
@@ -37,10 +37,10 @@ If you want to generate keys for all you label you can set the use the "auto_gen
 
 	elao_form:
 	    tree:
-	        auto_generate_label: true	       
-	        
+	        auto_generate_label: true
+
 This will set default label value to __true__ so keys will be generated for every labels.
-If you still need to set some specific fields a custom label, easy: set the label otpion in the form and that value will be used, no key will be generated.    
+If you still need to set some specific fields a custom label, easy: set the label otpion in the form and that value will be used, no key will be generated.
 
 #### Default configuration:
 
@@ -67,7 +67,7 @@ If you still need to set some specific fields a custom label, easy: set the labe
 	            root: 		"form"
 
 	            # Separator te be used between nodes
-	            separator: 	"."    
+	            separator: 	"."
 
 #### Desactivate the Tree feature:
 

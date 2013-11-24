@@ -3,6 +3,7 @@
 namespace Elao\Bundle\FormBundle\Service;
 
 use Symfony\Component\Form\FormView;
+
 use Elao\Bundle\FormBundle\Model\FormTree;
 use Elao\Bundle\FormBundle\Model\FormTreeNode;
 
@@ -20,9 +21,9 @@ class FormTreeBuilder
 
     /**
      * Get the full tree for a given view
-     * 
-     * @param  FormView $view 
-     * @return array         
+     *
+     * @param  FormView $view
+     * @return array
      */
     public function getTree(FormView $view)
     {
@@ -39,7 +40,7 @@ class FormTreeBuilder
 
     /**
      * Set form type that should not be treated as having children
-     * 
+     *
      * @param array $types
      */
     public function setNoChildren(array $types)
@@ -49,9 +50,9 @@ class FormTreeBuilder
 
     /**
      * Create a FormTreeNode for the given view
-     * 
-     * @param  FormView $view 
-     * @return FormTreeNode         
+     *
+     * @param  FormView $view
+     * @return FormTreeNode
      */
     private function createNodeFromView(FormView $view)
     {

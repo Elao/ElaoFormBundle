@@ -9,14 +9,14 @@ class FormTree implements \Iterator, \Countable
 {
 	/**
 	 * The FormTreeNode elements
-	 * 
+	 *
 	 * @var array
 	 */
 	private $nodes;
 
 	/**
 	 * Current position in the loop
-	 * 
+	 *
 	 * @var integer
 	 */
 	private $position = 0;
@@ -25,13 +25,13 @@ class FormTree implements \Iterator, \Countable
 	 * Constructor
 	 */
 	public function __construct($nodes = array())
-	{	
+	{
 		$this->nodes = $nodes;
 	}
 
 	/**
 	 * Add a parent node to the beginning of the tree
-	 * 
+	 *
 	 * @param FormTreeNode $node
 	 * @return int The new number of elements in the Tree
 	 */
@@ -42,7 +42,7 @@ class FormTree implements \Iterator, \Countable
 
 	/**
 	 * Add a child node to the end of the tree
-	 * 
+	 *
 	 * @param FormTreeNode $node
 	 * @return int The new number of elements in the Tree
 	 */
@@ -61,7 +61,7 @@ class FormTree implements \Iterator, \Countable
 
 	/**
 	 * Return the length of the tree
-	 * 
+	 *
 	 * @return int
 	 */
 	public function count()
@@ -71,7 +71,7 @@ class FormTree implements \Iterator, \Countable
 
 	/**
 	 * Return the current Node in the loop
-	 * 
+	 *
 	 * @return FormTreeNode
 	 */
 	public function current()
@@ -81,7 +81,7 @@ class FormTree implements \Iterator, \Countable
 
 	/**
 	 * Return the current position in the loop
-	 * 
+	 *
 	 * @return int
 	 */
 	public function key()
@@ -99,7 +99,7 @@ class FormTree implements \Iterator, \Countable
 
 	/**
 	 * Return weither or not the current position is valid
-	 * 
+	 *
 	 * @return int
 	 */
 	public function valid()

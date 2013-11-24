@@ -9,34 +9,34 @@ class FormTreeNode
 {
 	/**
 	 * The name of the node
-	 * 
+	 *
 	 * @var string
 	 */
 	private $name;
 
 	/**
 	 * Weither the node has labeled children or not.
-	 * 
+	 *
 	 * @var boolean
 	 */
 	private $children;
 
 	/**
 	 * Constructor
-	 * 
-	 * @param  string  $name        
-	 * @param  boolean $children 
+	 *
+	 * @param  string  $name
+	 * @param  boolean $children
 	 */
 	public function __construct($name, $children = false)
-	{	
+	{
 		$this->name     = (string) $name;
 		$this->children = (boolean) $children;
 	}
 
 	/**
 	 * Get the name of the node
-	 * 
-	 * @return string 
+	 *
+	 * @return string
 	 */
 	public function getName()
 	{
@@ -45,8 +45,8 @@ class FormTreeNode
 
 	/**
 	 * Get the name of the node
-	 * 
-	 * @return boolean 
+	 *
+	 * @return boolean
 	 */
 	public function hasChildren()
 	{
