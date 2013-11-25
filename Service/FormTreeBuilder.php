@@ -23,6 +23,7 @@ class FormTreeBuilder
      * Get the full tree for a given view
      *
      * @param  FormView $view
+     *
      * @return array
      */
     public function getTree(FormView $view)
@@ -52,6 +53,7 @@ class FormTreeBuilder
      * Create a FormTreeNode for the given view
      *
      * @param  FormView $view
+     *
      * @return FormTreeNode
      */
     private function createNodeFromView(FormView $view)
@@ -66,6 +68,7 @@ class FormTreeBuilder
      * Test if the given form view has children with labels
      *
      * @param FormView $view
+     *
      * @return boolean
      */
     private function hasChildrenWithLabel(FormView $view)

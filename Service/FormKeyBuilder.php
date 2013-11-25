@@ -52,6 +52,7 @@ class FormKeyBuilder
      *
      * @param FormTree $tree   The tree
      * @param string   $parent Suffix for nodes that have children
+     *
      * @return string The key
      */
     public function buildKeyFromTree(FormTree $tree, $parent)
