@@ -58,10 +58,11 @@ class FormTreeBuilder
      */
     private function createNodeFromView(FormView $view)
     {
-        return new FormTreeNode(
-            $view->vars['name'],
-            $this->hasChildrenWithLabel($view)
-        );
+        $haschildren  = $this->hasChildrenWithLabel($view);
+        $isCollection = $haschildren ? $this->isCollection($view) : false;
+        $isPrototype  = $this->isPrototype($view);
+
+        return new FormTreeNode($view->vars['name'], $haschildren, $isCollection, $isPrototype);
     }
 
     /**
@@ -84,5 +85,33 @@ class FormTreeBuilder
     	}
 
     	return true;
+    }
+
+    /**
+     * Test if the given form view is a collection
+     *
+     * @param FormView $view
+     *
+     * @return boolean
+     */
+    private function isCollection(FormView $view)
+    {
+        if ($view->parent === null || !$view->vars['compound']) {
+            return false;
+        }
+
+        return in_array('collection', $view->vars['block_prefixes']);
+    }
+
+    /**
+     * Test if the given form view is a prototype in a collection
+     *
+     * @param FormView $view
+     *
+     * @return boolean
+     */
+    private function isPrototype(FormView $view)
+    {
+        return $view->parent && $this->isCollection($view->parent);
     }
 }

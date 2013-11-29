@@ -56,7 +56,8 @@ class ElaoFormExtension extends Extension
             $keyBuilder
                 ->addArgument($config['blocks']['separator'])
                 ->addArgument($config['blocks']['root'])
-                ->addArgument($config['blocks']['children']);
+                ->addArgument($config['blocks']['children'])
+                ->addArgument($config['blocks']['prototype']);
 
             /* Set up the Form extension */
             $formExtension = $container->getDefinition('elao.form.extension.form_type_extension');

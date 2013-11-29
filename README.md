@@ -1,15 +1,20 @@
 ElaoFormBundle
 ==============
 
-Configuration:
---------------
+Collections:
+------------
 
-### The Form Tree:
+Provide support for collection:
+
+	$('[data-collection]').each(function (key, element) { new Collection(element); });
+
+The Form Tree:
+--------------
 
 The Form Tree feature provide a nice way of generating logic translation keys for form fields.
 It's used mainly to generate automatic labels on fields but can be use to built any key.
 
-_For example, for a given form RegisterType named "register" the key for its field 'email' would be "form.register.email"._
+_For example, for a given form RegisterType named "register" the key for its field 'email' would be "form.register.email.label"._
 
 The way keys are built can be customized to suit your needs:
 
@@ -20,6 +25,9 @@ The way keys are built can be customized to suit your needs:
 			blocks:
 	            # Prefix for children nodes
 	            children: 	"children"
+	            
+	            # Prefix for prototype nodes
+	            prototype: 	"prototype"
 
 	            # Prefix at the root of the key
 	            root: 		"form"
@@ -53,12 +61,20 @@ If you still need to set some specific fields a custom label, easy: set the labe
 
 	        # Customize available keys
 	        keys:
-	        	label: 	"label"
-	        	help:  	"help"
-	        	# Add yours ...
+		        form:
+		        	label: 	"label"
+		        	help:  	"help"
+		        	# Add yours ...
+		        collection:
+		        	label_add: 		"label_add"
+		        	label_delete: 	"label_delete"
+		        	# Add yours ...
 
 	        # Customize the ways keys are built
 	        blocks:
+
+	            # Prefix for prototype nodes
+	            prototype: 	"prototype"
 
 	            # Prefix for children nodes
 	            children: 	"children"
