@@ -52,25 +52,29 @@ class ElaoFormExtension extends Extension
             $loader->load('tree.xml');
 
             /* Set up the Key Builder */
-            $keyBuilder = $container->getDefinition(self::KEY_BUILDER);
-            $keyBuilder
+            $container->getDefinition(self::KEY_BUILDER)
                 ->addArgument($config['blocks']['separator'])
                 ->addArgument($config['blocks']['root'])
                 ->addArgument($config['blocks']['children'])
                 ->addArgument($config['blocks']['prototype']);
 
-            /* Set up the Form extension */
-            $formExtension = $container->getDefinition('elao.form.extension.form_type_extension');
-            $formExtension->addMethodCall('setAutoGenerate', array($config['auto_generate']));
-            $formExtension->addMethodCall('setKeys', array($config['keys']['form']));
-            $formExtension->addMethodCall('setTreebuilder', array(new Reference(self::TREE_BUILDER)));
-            $formExtension->addMethodCall('setKeybuilder', array(new Reference(self::KEY_BUILDER)));
+            $container->getDefinition('elao.form.extension.tree_aware_extension')
+                ->addMethodCall('setAutoGenerate', array($config['auto_generate']))
+                ->addMethodCall('setTreebuilder', array(new Reference(self::TREE_BUILDER)))
+                ->addMethodCall('setKeybuilder', array(new Reference(self::KEY_BUILDER)));
 
-            $formExtension = $container->getDefinition('elao.form.extension.collection_type_extension');
-            $formExtension->addMethodCall('setAutoGenerate', array($config['auto_generate']));
-            $formExtension->addMethodCall('setKeys', array($config['keys']['collection']));
-            $formExtension->addMethodCall('setTreebuilder', array(new Reference(self::TREE_BUILDER)));
-            $formExtension->addMethodCall('setKeybuilder', array(new Reference(self::KEY_BUILDER)));
+            /* Set up the Form extension */
+            $container
+                ->getDefinition('elao.form.extension.form_type_extension')
+                ->addMethodCall('setKeys', array($config['keys']['form']));
+
+            $container
+                ->getDefinition('elao.form.extension.button_type_extension')
+                ->addMethodCall('setKeys', array($config['keys']['form']));
+
+            $container
+                ->getDefinition('elao.form.extension.collection_type_extension')
+                ->addMethodCall('setKeys', array($config['keys']['collection']));
         }
     }
 }

@@ -7,16 +7,23 @@
     <parameters>
         <parameter key="elao.form.extension.form_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\FormTypeExtension</parameter>
         <parameter key="elao.form.extension.collection_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\CollectionTypeExtension</parameter>
+        <parameter key="elao.form.extension.button_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\ButtonTypeExtension</parameter>
     </parameters>
 
     <services>
         <!-- Form Extension -->
-        <service id="elao.form.extension.form_type_extension" class="%elao.form.extension.form_type_extension.class%">
+        <service id="elao.form.extension.tree_aware_extension" abstract="true" />
+
+        <service id="elao.form.extension.form_type_extension" class="%elao.form.extension.form_type_extension.class%" parent="elao.form.extension.tree_aware_extension">
             <tag name="form.type_extension" alias="form" />
         </service>
 
-        <service id="elao.form.extension.collection_type_extension" class="%elao.form.extension.collection_type_extension.class%">
+        <service id="elao.form.extension.collection_type_extension" class="%elao.form.extension.collection_type_extension.class%" parent="elao.form.extension.tree_aware_extension">
             <tag name="form.type_extension" alias="collection" />
+        </service>
+
+        <service id="elao.form.extension.button_type_extension" class="%elao.form.extension.button_type_extension.class%" parent="elao.form.extension.tree_aware_extension">
+            <tag name="form.type_extension" alias="button" />
         </service>
     </services>
 </container>
