@@ -126,6 +126,14 @@
     {% endif %}
 {% endblock %}
 
+{# Buttons #}
+
+{% block button_row %}
+{% spaceless %}
+    {{ form_widget(form) }}
+{% endspaceless %}
+{% endblock button_row %}
+
 {# Collections #}
 
 {% block collection_widget %}
