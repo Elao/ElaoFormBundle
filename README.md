@@ -45,7 +45,7 @@ If you want to generate keys for all you label you can set the use the "auto_gen
 
 	elao_form:
 	    tree:
-	        auto_generate_label: true
+	        auto_generate: true
 
 This will set default label value to __true__ so keys will be generated for every labels.
 If you still need to set some specific fields a custom label, easy: set the label otpion in the form and that value will be used, no key will be generated.
