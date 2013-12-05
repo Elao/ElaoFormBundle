@@ -74,7 +74,7 @@ class FormTreeBuilder
      */
     private function hasChildrenWithLabel(FormView $view)
     {
-    	if ($view->parent === null || !isset($view->vars['compound']) || !$view->vars['compound']) {
+    	if (!isset($view->vars['compound']) || !$view->vars['compound']) {
             return false;
     	}
 
