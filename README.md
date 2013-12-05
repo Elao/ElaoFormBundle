@@ -8,6 +8,14 @@ Provide support for collection:
 
 	$('[data-collection]').each(function (key, element) { new Collection(element); });
 
+Buttons:
+------------
+
+Provide sortcut for adding submit and reset buttons:
+All form have now an optional option "submit" and "reset", setting it to true adds a default submit/reset button
+
+	$form = $this->createForm('post', $post, array('submit' => true, 'reset' => true));
+
 The Form Tree:
 --------------
 
