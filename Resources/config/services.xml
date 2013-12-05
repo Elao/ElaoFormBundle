@@ -8,6 +8,7 @@
         <parameter key="elao.form.extension.form_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\FormTypeExtension</parameter>
         <parameter key="elao.form.extension.collection_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\CollectionTypeExtension</parameter>
         <parameter key="elao.form.extension.button_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\ButtonTypeExtension</parameter>
+        <parameter key="elao.form.extension.choice_type_extension.class">Elao\Bundle\FormBundle\Form\Extension\ChoiceTypeExtension</parameter>
     </parameters>
 
     <services>
@@ -24,6 +25,10 @@
 
         <service id="elao.form.extension.button_type_extension" class="%elao.form.extension.button_type_extension.class%" parent="elao.form.extension.tree_aware_extension">
             <tag name="form.type_extension" alias="button" />
+        </service>
+
+        <service id="elao.form.extension.choice_type_extension" class="%elao.form.extension.choice_type_extension.class%" parent="elao.form.extension.tree_aware_extension">
+            <tag name="form.type_extension" alias="choice" />
         </service>
     </services>
 </container>
