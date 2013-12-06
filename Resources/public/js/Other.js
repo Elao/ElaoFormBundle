@@ -4,7 +4,7 @@ function Other (element, toggle)
     this.trigger  = this.find(this.element.data('other-trigger'));
     this.target   = $('#' + this.element.data('other-target'));
     this.value    = eval(this.element.data('other-value'));
-    this.multiple = typeof(this.value) === 'object';
+    this.multiple = $.isArray(this.value);
     this.type     = this.guessType(element);
 
     this.normalizeValue();
@@ -53,6 +53,7 @@ Other.prototype.getCurrentValue = function (e)
                     values.push(option.val());
                 }
             }
+
             return values;
 
         default:
