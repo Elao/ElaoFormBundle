@@ -116,6 +116,15 @@
 {% endspaceless %}
 {% endblock choice_widget_collapsed %}
 
+{# Choice #}
+
+{% block choice_widget %}
+{% spaceless %}
+    {% set attr = attr|merge({'data-type': 'choice' ~ (expanded ? '-expanded' : '') ~ (multiple ? '-multiple' : '')}) %}
+    {{ parent() }}
+{% endspaceless %}
+{% endblock choice_widget %}
+
 {# Help block #}
 
 {% block form_help %}
