@@ -25,8 +25,6 @@ Other.prototype.update = function (e)
 
     this.target.toggleClass('hide', !match);
 
-    console.log(value, match);
-
     this.element.trigger("other:" + (match ? 'displayed' : 'hidden'), [this.element, this.target, value]);
 };
 

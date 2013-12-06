@@ -16,7 +16,6 @@ function Collection (element)
     }
 
     if (deleteButton) {
-        console.log(deleteButton);
         this.element.on('click', '.' + deleteButton, this.remove.bind(this));
         this.element.removeAttr('data-delete');
     }
@@ -36,8 +35,6 @@ Collection.prototype.add = function ()
 
 Collection.prototype.remove = function (e)
 {
-    console.log("Remove", e);
-
     var item = $("#" + $(e.target).data('delete'));
 
     item.remove();
