@@ -58,26 +58,26 @@ class ElaoFormExtension extends Extension
                 ->addArgument($config['blocks']['children'])
                 ->addArgument($config['blocks']['prototype']);
 
-            $container->getDefinition('elao.form.extension.tree_aware_extension')
+            $container->getDefinition('elao.form.extension.tree.tree_aware_extension')
                 ->addMethodCall('setAutoGenerate', array($config['auto_generate']))
                 ->addMethodCall('setTreebuilder', array(new Reference(self::TREE_BUILDER)))
                 ->addMethodCall('setKeybuilder', array(new Reference(self::KEY_BUILDER)));
 
             /* Set up the Form extension */
             $container
-                ->getDefinition('elao.form.extension.form_type_extension')
+                ->getDefinition('elao.form.extension.tree.form_type_extension')
                 ->addMethodCall('setKeys', array($config['keys']['form']));
 
             $container
-                ->getDefinition('elao.form.extension.button_type_extension')
+                ->getDefinition('elao.form.extension.tree.button_type_extension')
                 ->addMethodCall('setKeys', array($config['keys']['form']));
 
             $container
-                ->getDefinition('elao.form.extension.collection_type_extension')
+                ->getDefinition('elao.form.extension.tree.collection_type_extension')
                 ->addMethodCall('setKeys', array($config['keys']['collection']));
 
             $container
-                ->getDefinition('elao.form.extension.choice_type_extension')
+                ->getDefinition('elao.form.extension.tree.choice_type_extension')
                 ->addMethodCall('setKeys', array($config['keys']['choice']));
         }
     }

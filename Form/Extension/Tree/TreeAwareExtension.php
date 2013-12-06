@@ -1,6 +1,6 @@
 <?php
 
-namespace Elao\Bundle\FormBundle\Form\Extension;
+namespace Elao\Bundle\FormBundle\Form\Extension\Tree;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
