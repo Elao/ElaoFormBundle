@@ -20,7 +20,7 @@ class ChoiceTypeExtension extends TreeAwareExtension
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         if ($this->autoGenerate) {
-            $resolver->replaceDefaults(array('empty_value' => true));
+            //$resolver->replaceDefaults(array('empty_value' => true));
         }
     }
 }
