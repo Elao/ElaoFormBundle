@@ -37,7 +37,7 @@ class CollectionTypeExtension extends TreeAwareExtension
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
-        if ($this->treeBuilder && $this->keyBuilder && $view->vars['prototype']) {
+        if ($this->treeBuilder && $this->keyBuilder && array_key_exists('prototype', $view->vars)) {
             $view->vars['prototype']->vars['tree']  = $this->treeBuilder->getTree($view->vars['prototype']);
             $view->vars['prototype']->vars['label'] = $this->keyBuilder->buildKeyFromTree($view->vars['prototype']->vars['tree'], 'label');
         }
