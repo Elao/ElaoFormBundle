@@ -21,6 +21,7 @@ function Collection (element)
     }
 
     this.element.removeAttr('data-prototype');
+    this.element.removeAttr('data-collection');
 }
 
 Collection.prototype.add = function ()
