@@ -74,11 +74,11 @@ class ElaoFormExtension extends Extension
 
             $container
                 ->getDefinition('elao.form.extension.tree.collection_type_extension')
-                ->addMethodCall('setKeys', array($config['keys']['collection']));
+                ->addMethodCall('setKeys', array(array_merge($config['keys']['form'], $config['keys']['collection'])));
 
             $container
                 ->getDefinition('elao.form.extension.tree.choice_type_extension')
-                ->addMethodCall('setKeys', array($config['keys']['choice']));
+                ->addMethodCall('setKeys', array(array_merge($config['keys']['form'], $config['keys']['choice'])));
         }
     }
 }

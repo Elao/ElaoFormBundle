@@ -39,6 +39,14 @@ class CollectionTypeExtension extends AbstractTypeExtension
             $child->vars['block_prefixes'][] = 'collection_item';
         }
 
-        $view->vars['prototype']->vars['block_prefixes'][] = 'collection_item';
+        if ($options['allow_add'] && $options['prototype']) {
+
+            $view->vars['prototype']->vars['block_prefixes'][] = 'collection_item';
+
+            if ($view->vars['prototype']->vars['label'] == $options['prototype_name'].'label__') {
+                $view->vars['prototype']->vars['label'] = $options['label'];
+                $options['options']['label'] = $options['label'];
+            }
+        }
     }
 }

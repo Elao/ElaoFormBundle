@@ -86,12 +86,25 @@ abstract class TreeAwareExtension extends AbstractTypeExtension
         if ($this->treeBuilder && $this->keyBuilder) {
             foreach ($this->keys as $key => $value) {
                 if (isset($options[$key]) && $options[$key] === true) {
-                    if (!isset($view->vars['tree'])) {
-                        $view->vars['tree'] = $this->treeBuilder->getTree($view);
-                    }
-                    $view->vars[$key] = $this->keyBuilder->buildKeyFromTree($view->vars['tree'], $value);
+                    $this->generateKey($view, $key, $value);
                 }
             }
         }
+    }
+
+    /**
+     * Generate the key for the given view field
+     *
+     * @param FormView $view
+     * @param string $key
+     * @param string $value
+     */
+    protected function generateKey(FormView &$view, $key, $value)
+    {
+        if (!isset($view->vars['tree'])) {
+            $view->vars['tree'] = $this->treeBuilder->getTree($view);
+        }
+
+        $view->vars[$key] = $this->keyBuilder->buildKeyFromTree($view->vars['tree'], $value);
     }
 }
