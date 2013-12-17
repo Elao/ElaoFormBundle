@@ -37,11 +37,13 @@ class CollectionTypeExtension extends AbstractTypeExtension
     {
         foreach ($view as $child) {
             $child->vars['block_prefixes'][] = 'collection_item';
+            $child->vars['block_prefixes'][] = $form->getName() . '_item';
         }
 
         if ($options['allow_add'] && $options['prototype']) {
 
             $view->vars['prototype']->vars['block_prefixes'][] = 'collection_item';
+            $view->vars['prototype']->vars['block_prefixes'][] = $form->getName() . '_item';
 
             if ($view->vars['prototype']->vars['label'] == $options['prototype_name'].'label__') {
                 $view->vars['prototype']->vars['label'] = $options['label'];
