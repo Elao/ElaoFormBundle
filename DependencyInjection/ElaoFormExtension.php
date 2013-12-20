@@ -31,13 +31,7 @@ class ElaoFormExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
-        $container->setParameter(
-            'twig.form.resources',
-            array_merge(
-                $container->getParameter('twig.form.resources'),
-                array('ElaoFormBundle:Form:form_elao_layout.html.twig')
-            )
-        );
+        $container->setParameter('form_elao_layout', 'ElaoFormBundle:Form:form_elao_layout.html.twig');
 
         $this->loadTreeConfig($container, $loader, $config['tree']);
     }
