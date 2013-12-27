@@ -19,8 +19,15 @@
     {{ form_widget(form) }}
 {% else %}
     <div {{ block('row_container_attributes') }}>
+
         {% if label is not sameas(false) %}
-            {{ form_label(form, label) }}
+            {% if label_group|default(false) %}
+                <div {{ block('label_group_attributes') }}>
+            {% endif %}
+                    {{ form_label(form, label) }}
+            {% if label_group|default(false) %}
+                </div>
+            {% endif %}
         {% endif %}
 
         {% if control_group|default(false) %}
@@ -70,13 +77,31 @@
 {% endspaceless %}
 {% endblock control_group_attributes %}
 
+{% block label_group_attributes %}
+{% spaceless %}
+    {% for attrname, attrvalue in label_group_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+{% endspaceless %}
+{% endblock label_group_attributes %}
+
 {# Form label #}
 
 {% block form_label %}
 {% spaceless %}
-    {% set label_class = label_class|default('label') %}
-    {% set label_attr  = label_attr|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class)|trim}) %}
-    {{ parent() }}
+    {% set label_attr = label_attr|default({})|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class|default('label'))|trim}) %}
+    {% if label is not sameas(false) %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+            {{ label|trans({}, translation_domain)|raw }}
+        </label>
+    {% endif %}
 {% endspaceless %}
 {% endblock form_label %}
 
