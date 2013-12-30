@@ -24,7 +24,7 @@
             {% if label_group|default(false) %}
                 <div {{ block('label_group_attributes') }}>
             {% endif %}
-                    {{ form_label(form, label) }}
+                    {{ form_label(form, label, {label_attr: label_attr|default({})}) }}
             {% if label_group|default(false) %}
                 </div>
             {% endif %}
