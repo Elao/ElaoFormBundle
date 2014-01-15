@@ -89,9 +89,7 @@
 {% spaceless %}
     {% set label_attr = label_attr|default({})|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class|default('label'))|trim}) %}
     {% if label is not sameas(false) %}
-        {% if not compound %}
-            {% set label_attr = label_attr|merge({'for': id}) %}
-        {% endif %}
+        {% set label_attr = label_attr|merge({'for': id}) %}
         {% if required %}
             {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
         {% endif %}
@@ -110,20 +108,33 @@
 {% block form_widget %}
 {% spaceless %}
     {% if not compound or expanded|default(true) is sameas(false) %}
-		{% set control_class = control_class|default('input') %}
-	    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
+        {% set control_class = control_class|default('input') %}
+        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
     {% endif %}
-	{{ parent() }}
+    {{ parent() }}
 {% endspaceless %}
 {% endblock form_widget %}
 
 {% block form_widget_simple %}
 {% spaceless %}
-	{% set control_class = control_class|default('input') %}
+    {% set control_class = control_class|default('input') %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
-	{{ parent() }}
+    {{ parent() }}
 {% endspaceless %}
 {% endblock form_widget_simple %}
+
+{% block form_widget_compound %}
+{% spaceless %}
+    {% set tag = tag|default('fieldset') %}
+    <{{ tag }} {{ block('widget_container_attributes') }}>
+        {% if form.parent is empty %}
+            {{ form_errors(form) }}
+        {% endif %}
+        {{ block('form_rows') }}
+        {{ form_rest(form) }}
+    </{{ tag }}>
+{% endspaceless %}
+{% endblock form_widget_compound %}
 
 {% block textarea_widget %}
 {% spaceless %}
@@ -133,14 +144,6 @@
 {% endspaceless %}
 {% endblock textarea_widget %}
 
-{% block choice_widget_collapsed %}
-{% spaceless %}
-	{% set control_class = control_class|default('input') %}
-    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
-	{{ parent() }}
-{% endspaceless %}
-{% endblock choice_widget_collapsed %}
-
 {# Choice #}
 
 {% block choice_widget %}
@@ -149,6 +152,26 @@
     {{ parent() }}
 {% endspaceless %}
 {% endblock choice_widget %}
+
+{% block choice_widget_collapsed %}
+{% spaceless %}
+	{% set control_class = control_class|default('input') %}
+    {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
+	{{ parent() }}
+{% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block choice_widget_expanded %}
+{% spaceless %}
+    {% set tag = tag|default('fieldset') %}
+    <{{ tag }} {{ block('widget_container_attributes') }}>
+    {% for child in form %}
+        {{ form_widget(child) }}
+        {{ form_label(child) }}
+    {% endfor %}
+    </{{ tag }}>
+{% endspaceless %}
+{% endblock choice_widget_expanded %}
 
 {# Help block #}
 
