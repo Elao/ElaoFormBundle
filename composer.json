@@ -1,8 +1,8 @@
 {
     "name": "elao/form-bundle",
     "type": "symfony-bundle",
-    "description": "Handle form theme and stuff.",
-    "keywords": ["elao", "form", "twitter", "bootstrap"],
+    "description": "Various Form improvements",
+    "keywords": ["elao", "form", "collection", "javascript"],
     "homepage": "https://github.com/Elao/ElaoFormBundle",
     "licence": "MIT",
     "authors": [
@@ -30,7 +30,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "0.1.x-dev"
         }
     },
     "target-dir": "Elao/Bundle/FormBundle"

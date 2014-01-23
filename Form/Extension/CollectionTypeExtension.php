@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This file is part of the ElaoForm bundle.
+ *
+ * Copyright (C) 2014 Elao
+ *
+ * @author Elao <contact@elao.com>
+ */
+
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
 use Symfony\Component\Form\FormInterface;
@@ -7,6 +15,11 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Exention for the CollectionType, provide:
+ * - Label options for Add and Delete buttons
+ * - Block prefixes for the collection and its items
+ */
 class CollectionTypeExtension extends AbstractTypeExtension
 {
     /**
