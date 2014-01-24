@@ -4,7 +4,7 @@
     "description": "Various Form improvements",
     "keywords": ["elao", "form", "collection", "javascript"],
     "homepage": "https://github.com/Elao/ElaoFormBundle",
-    "licence": "MIT",
+    "license": "MIT",
     "authors": [
         {
             "name": "Elao",
