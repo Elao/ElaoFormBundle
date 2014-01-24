@@ -78,7 +78,7 @@ class FormOtherTypeExtension extends AbstractTypeExtension
     private function checkExists(FormInterface $form, $child)
     {
         if (!$form->has($child)) {
-            throw new Exception(sprintf("Uknow field '%s' in form '%s'", $child, $form->getName()));
+            throw new \Exception(sprintf("Uknow field '%s' in form '%s'", $child, $form->getName()));
         }
     }
 
