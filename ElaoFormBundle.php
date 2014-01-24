@@ -8,7 +8,6 @@
  * @author Elao <contact@elao.com>
  */
 
-
 namespace Elao\Bundle\FormBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
