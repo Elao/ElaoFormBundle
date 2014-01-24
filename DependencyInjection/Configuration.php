@@ -40,7 +40,7 @@ class Configuration implements ConfigurationInterface
                     ->info('<info>Activate the Other Choice feature</info>')
                     ->defaultTrue()
                 ->end()
-            ->end()
+            ->end();
 
         return $treeBuilder;
     }
