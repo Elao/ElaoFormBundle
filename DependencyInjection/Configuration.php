@@ -40,6 +40,10 @@ class Configuration implements ConfigurationInterface
                     ->info('<info>Activate the Other Choice feature</info>')
                     ->defaultTrue()
                 ->end()
+                ->booleanNode('help')
+                    ->info('<info>Activate the Help feature</info>')
+                    ->defaultTrue()
+                ->end()
             ->end();
 
         return $treeBuilder;

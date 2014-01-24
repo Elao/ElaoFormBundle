@@ -24,25 +24,38 @@ use Symfony\Component\DependencyInjection\Reference;
 class ElaoFormExtension extends Extension
 {
     /**
+     * Features
+     *
+     * @var array
+     */
+    private $features;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->features = array(
+            'collection'   => "collection.xml",
+            'buttons'      => "buttons.xml",
+            'other_choice' => "other_choice.xml",
+            'help'         => "help.xml",
+        );
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $config        = $this->processConfiguration($configuration, $configs);
+        $loader        = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        if ($config['collection']) {
-            $loader->load('collection.xml');
-        }
-
-        if ($config['buttons']) {
-            $loader->load('buttons.xml');
-        }
-
-        if ($config['other_choice']) {
-            $loader->load('other_choice.xml');
+        foreach ($this->features as $option => $xml) {
+            if ($config[$option]) {
+                $loader->load($xml);
+            }
         }
     }
 }
