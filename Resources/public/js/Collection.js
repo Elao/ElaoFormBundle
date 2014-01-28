@@ -4,7 +4,7 @@ function Collection (element)
     this.addButton     = false;
     this.htmlPrototype = this.element.data('prototype');
     this.replaceKey    = new RegExp(this.element.data('collection'), 'g');
-    this.currentKey    = this.element.children().length;
+    this.currentKey    = this.count();
 
     var addButton    = this.element.data('add'),
         deleteButton = this.element.data('delete');
@@ -22,6 +22,11 @@ function Collection (element)
 
     this.element.removeAttr('data-prototype');
     this.element.removeAttr('data-collection');
+}
+
+Collection.prototype.count = function ()
+{
+    return this.element.children().length;
 }
 
 Collection.prototype.add = function ()
