@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * This file is part of the ElaoForm bundle.
+ *
+ * Copyright (C) 2014 Elao
+ *
+ * @author Elao <contact@elao.com>
+ */
+
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
 use Symfony\Component\Form\FormInterface;
@@ -8,6 +16,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Exention for the FormType, provides:
+ * - Other choice feature
+ */
 class FormOtherTypeExtension extends AbstractTypeExtension
 {
     /**
@@ -58,22 +70,22 @@ class FormOtherTypeExtension extends AbstractTypeExtension
     /**
      * Check that the given form has the given child
      *
-     * @param FormInterface $form
-     * @param string $child
+     * @param FormInterface $form  The form
+     * @param string        $child The child
      *
-     * @throws Exception If the child can't be found
+     * @throws \Exception If the child can't be found
      */
     private function checkExists(FormInterface $form, $child)
     {
         if (!$form->has($child)) {
-            throw new Exception(sprintf("Uknow field '%s' in form '%s'", $child, $form->getName()));
+            throw new \Exception(sprintf("Uknow field '%s' in form '%s'", $child, $form->getName()));
         }
     }
 
     /**
      * Get identifier
      *
-     * @param FormView $view
+     * @param FormView $view The FormView
      *
      * @return array
      */

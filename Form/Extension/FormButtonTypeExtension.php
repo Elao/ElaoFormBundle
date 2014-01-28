@@ -1,11 +1,23 @@
 <?php
 
+/**
+ * This file is part of the ElaoForm bundle.
+ *
+ * Copyright (C) 2014 Elao
+ *
+ * @author Elao <contact@elao.com>
+ */
+
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/**
+ * Exention for the FormType, provides:
+ * - Submit and Reset buttons
+ */
 class FormButtonTypeExtension extends AbstractTypeExtension
 {
     /**
@@ -33,7 +45,7 @@ class FormButtonTypeExtension extends AbstractTypeExtension
 
         foreach ($buttons as $button) {
             if (isset($options[$button]) && $options[$button] && !$builder->has($button)) {
-                $builder->add('submit', 'submit');
+                $builder->add($button, $button);
             }
         }
     }

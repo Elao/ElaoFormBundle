@@ -173,6 +173,27 @@
 {% endspaceless %}
 {% endblock choice_widget_expanded %}
 
+{% block choice_widget_options %}
+{% spaceless %}
+    {% for group_label, choice in options %}
+        {% if choice is iterable %}
+            <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+                {% set options = choice %}
+                {{ block('choice_widget_options') }}
+            </optgroup>
+        {% else %}
+            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>
+                {{ block('choice_widget_options_label') }}
+            </option>
+        {% endif %}
+    {% endfor %}
+{% endspaceless %}
+{% endblock choice_widget_options %}
+
+{% block choice_widget_options_label %}
+    {{ choice.label|trans({}, translation_domain) }}
+{% endblock %}
+
 {# Help block #}
 
 {% block form_help %}
