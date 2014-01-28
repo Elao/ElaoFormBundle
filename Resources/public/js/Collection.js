@@ -5,6 +5,8 @@ function Collection (element)
     this.htmlPrototype = this.element.data('prototype');
     this.replaceKey    = new RegExp(this.element.data('collection'), 'g');
     this.currentKey    = this.count();
+    this.min           = this.element.data('collection-min');
+    this.max           = this.element.data('collection-max');
 
     var addButton    = this.element.data('add'),
         deleteButton = this.element.data('delete');
@@ -20,8 +22,33 @@ function Collection (element)
         this.element.removeAttr('data-delete');
     }
 
+    this.element.removeAttr('data-collection-min');
+    this.element.removeAttr('data-collection-max');
     this.element.removeAttr('data-prototype');
     this.element.removeAttr('data-collection');
+
+    this.element.on('collection:added', this.handleCount.bind(this));
+    this.element.on('collection:deleted', this.handleCount.bind(this));
+    this.handleCount();
+}
+
+Collection.prototype.handleCount = function ()
+{
+    if (this.min) {
+        if (this.count() > this.min) {
+            $('[data-delete]', this.element).each(function (key, element) { $(element).show() });
+        } else {
+            $('[data-delete]', this.element).each(function (key, element) { $(element).hide() });
+        }
+    }
+
+    if (this.max) {
+        if (this.count() < this.max) {
+            this.addButton.show();
+        } else {
+            this.addButton.hide();
+        }
+    }
 }
 
 Collection.prototype.count = function ()

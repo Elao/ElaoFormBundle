@@ -35,6 +35,7 @@ class CollectionTypeExtension extends AbstractTypeExtension
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
+        $resolver->setOptional(array('min', 'max'));
         $resolver->setDefaults(
             array(
                 'label_add'    => 'Add',
@@ -62,6 +63,14 @@ class CollectionTypeExtension extends AbstractTypeExtension
                 $view->vars['prototype']->vars['label'] = $options['label'];
                 $options['options']['label'] = $options['label'];
             }
+        }
+
+        if (isset($options['min'])) {
+            $view->vars['attr']['data-collection-min'] = intval($options['min']);
+        }
+
+        if (isset($options['max'])) {
+            $view->vars['attr']['data-collection-max'] = intval($options['max']);
         }
     }
 }
