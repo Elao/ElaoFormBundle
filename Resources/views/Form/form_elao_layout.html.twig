@@ -145,6 +145,47 @@
 {% endspaceless %}
 {% endblock textarea_widget %}
 
+{# Boxes #}
+
+{% block box_row %}
+{% spaceless %}
+    {% if horizontal|default(false) %}
+        {% set label_columns = label_columns|default(3) %}
+        {% set widget_columns = widget_columns|default(12 - label_columns) %}
+        {% set group_attr = group_attr|default({})|merge({'class': (group_attr.class|default('') ~ ' ' ~ 'row')|trim }) %}
+
+        {% set control_group = true %}
+        {% set control_group_attr = control_group_attr|default({})|merge({'class': (control_group_attr.class|default('') ~ ' ' ~ control_group_class|default('col-lg-' ~ widget_columns ~ ' col-md-' ~ widget_columns ~ ' col-sm-' ~ widget_columns ~ ' col-lg-offset-' ~ label_columns ~ ' col-md-offset-' ~ label_columns ~ ' col-sm-offset-' ~ label_columns))|trim}) %}
+    {% endif %}
+
+    <div {{ block('row_container_attributes') }}>
+        {% if control_group|default(false) %}
+            <div {{ block('control_group_attributes') }}>
+        {% endif %}
+
+            {% set help = help|default(false) %}
+            {% set help_position = help_position|default('bottom') %}
+
+            {{ help and help_position == 'top' ? block('form_help') : '' }}
+
+            {% if label is sameas(false) %}
+                {{ form_widget(form) }}
+            {% else %}
+                {{ form_label(form, form_widget(form) ~ label|trans({}, translation_domain)) }}
+            {% endif %}
+
+            {{ form_errors(form) }}
+            {{ block('collection_delete_button') }}
+
+            {{ help and help_position == 'bottom' ? block('form_help') : '' }}
+
+        {% if control_group|default(false) %}
+            </div>
+        {% endif %}
+    </div>
+{% endspaceless %}
+{% endblock box_row %}
+
 {# Choice #}
 
 {% block choice_widget %}
