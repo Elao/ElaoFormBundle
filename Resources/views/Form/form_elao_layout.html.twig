@@ -39,10 +39,11 @@
 
             {{ help and help_position == 'top' ? block('form_help') : '' }}
 
-            {% block form_row_widget_container_widget form_widget(form) %}
-            {% block form_row_widget_container_errors form_errors(form) %}
+            {{ form_widget(form) }}
 
             {{ help and help_position == 'bottom' ? block('form_help') : '' }}
+
+            {{ form_errors(form) }}
 
             {{ block('collection_delete_button') }}
 
