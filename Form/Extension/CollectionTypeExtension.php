@@ -72,5 +72,8 @@ class CollectionTypeExtension extends AbstractTypeExtension
         if (isset($options['max'])) {
             $view->vars['attr']['data-collection-max'] = intval($options['max']);
         }
+
+        $view->vars['label_add'] = $options['label_add'];
+        $view->vars['label_delete'] = $options['label_delete'];
     }
 }
