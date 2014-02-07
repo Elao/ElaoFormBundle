@@ -37,6 +37,7 @@ class ElaoFormExtension extends Extension
     {
         $this->features = array(
             'collection'   => "collection.xml",
+            'choice'       => "choice.xml",
             'buttons'      => "buttons.xml",
             'other_choice' => "other_choice.xml",
             'help'         => "help.xml",
