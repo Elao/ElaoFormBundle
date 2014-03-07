@@ -1,0 +1,3 @@
+{% macro html_attributes(attributes) %}
+    {% for attrname, attrvalue in label_group_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+{% endmacro %}

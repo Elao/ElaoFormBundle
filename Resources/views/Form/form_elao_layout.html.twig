@@ -1,4 +1,5 @@
 {% extends "form_div_layout.html.twig" %}
+{% import "ElaoFormBundle::form_macro.html.twig" as form_macro %}
 
 {# Form root block #}
 
@@ -66,7 +67,7 @@
     {% endif %}
 
     id="{{ block('group_id') }}"
-	{% for attrname, attrvalue in group_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+    {{ form_macro.html_attributes(group_attr) }}
 {% endspaceless %}
 {% endblock %}
 
@@ -74,13 +75,13 @@
 
 {% block control_group_attributes %}
 {% spaceless %}
-    {% for attrname, attrvalue in control_group_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+    {{ form_macro.html_attributes(control_group_attr) }}
 {% endspaceless %}
 {% endblock control_group_attributes %}
 
 {% block label_group_attributes %}
 {% spaceless %}
-    {% for attrname, attrvalue in label_group_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+    {{ form_macro.html_attributes(label_group_attr) }}
 {% endspaceless %}
 {% endblock label_group_attributes %}
 
@@ -97,7 +98,7 @@
         {% if label is empty %}
             {% set label = name|humanize %}
         {% endif %}
-        <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+        <label{{ form_macro.html_attributes(label_attr) }}>
             {{ label|trans({}, translation_domain)|raw }}
         </label>
     {% endif %}
@@ -318,9 +319,9 @@
 
 {% block collection_button_attributes %}
 {% spaceless %}
-    type="button"
-    id="{{ block('collection_' ~ button_function ~ '_button_id') }}"
-    {% for attrname, attrvalue in button_attr %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+    {% set button_attr = button_attr|default({})|merge({id: block('collection_' ~ button_function ~ '_button_id')}) %}
+    {% set button_attr = button_attr|default({})|merge({type: 'button'}) %}
+    {{ form_macro.html_attributes(button_attr) }}
 {% endspaceless %}
 {% endblock collection_button_attributes %}
 
