@@ -3,6 +3,8 @@
 
 __Best served with [Elao/form.js](https://github.com/Elao/form.js)!__
 
+Tools & enhancements for Symfony 2 forms
+
 ## Installation:
 
 Add ElaoFormBundle to your `composer.json`:
