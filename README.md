@@ -1,12 +1,79 @@
-ElaoFormBundle
+[WIP] ElaoFormBundle
 ==============
+
+__Best server with [Elao/form.js](https://github.com/Elao/form.js)!__
+
+## Installation:
+
+Add ElaoFormBundle to your `composer.json`:
+
+``` json
+{
+    "require": {
+        "elao/form-bundle": "0.1.*"
+    }
+}
+```
+
+Now download the bundle by running the command:
+
+``` bash
+$ php composer.phar update elao/form-bundle
+```
+
+Enable the bundle in the kernel:
+
+``` php
+<?php
+// app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new Elao\Bundle\FormBundle\ElaoFormBundle(),
+    );
+}
+```
+
+## Usage:
+
+Use the provided form template, globally:
+
+``` yaml
+# Twig Configuration
+twig:
+    form:
+        resources:
+            - "ElaoFormBundle:Form:form_elao_layout.html.twig"
+```
+
+Or on a specific form:
+
+``` twig
+{% form_theme form 'ElaoFormBundle:Form:form_elao_layout.html.twig' %}
+```
+
+## Features:
 
 Collections:
 ------------
 
 Provide support for collection:
 
-	$('[data-collection]').each(function (key, element) { new Collection(element); });
+	$('[data-collection]').collection();
+
+_Note:_ For more details, see [Elao/form.js collection documentation](https://github.com/Elao/form.js/blob/master/doc/collection.md).
+
+Help:
+--------
+
+Provide an `help` option that automatically adds an help block to the field.
+Use as below:
+
+	$builder->add('email', 'email', array('help' => "A valid email address"));
+
+_Note:_ The `help` string is gonna be translated by default just like the label of the field.
 
 Buttons:
 --------
@@ -16,58 +83,3 @@ All form have now an optional option "submit" and "reset", setting it to true ad
 
 	$form = $this->createForm('post', $post, array('submit' => true, 'reset' => true));
 
-Automatic 'other' field display:
---------------------------------
-
-Add an "**other_choice**" option to forms allowing you to set a trigget/target field display based on values.
-
-The "**other_choice**" expect 3 keys:
-
-* __trigger__ (string): The field that value should be watched
-* __target__ (string): The field to hide/show
-* __value__ (scalar|array): The value(s) that should display the 'target' field
-
-In the following example, the "state" entity only when the selected country is 'us':
-
-	<?php
-
-	namespace Acme\DemoBundle\Form;
-
-	use Symfony\Component\Form\AbstractType;
-	use Symfony\Component\Form\FormBuilderInterface;
-	use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-
-	class AddressType extends AbstractType
-	{
-	    /**
-	     * @param FormBuilderInterface $builder
-	     * @param array $options
-	     */
-	    public function buildForm(FormBuilderInterface $builder, array $options)
-	    {
-	    	$builder
-		    	->add(
-		    		'country',
-		    		'choice',
-		    		array(
-		    			'choices' => array(
-		    				'us' => 'USA',
-		    				'gb' => 'Great Britain',
-		    				'fr' => 'France'
-		    			)
-		    		)
-		    	)
-		    	->add('state');
-	    }
-
-	    /**
-	     * @param OptionsResolverInterface $resolver
-	     */
-	    public function setDefaultOptions(OptionsResolverInterface $resolver)
-	    {
-	        $resolver->setDefaults(array(
-	            'data_class'   => 'Acme\DemoBundle\Entity\Address',
-	            'other_choice' => ['trigger' => 'country', 'target' => 'state', 'value' => 'us'],
-	        ));
-	    }
-	}

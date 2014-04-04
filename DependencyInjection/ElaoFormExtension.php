@@ -36,11 +36,10 @@ class ElaoFormExtension extends Extension
     public function __construct()
     {
         $this->features = array(
-            'collection'   => "collection.xml",
-            'choice'       => "choice.xml",
-            'buttons'      => "buttons.xml",
-            'other_choice' => "other_choice.xml",
-            'help'         => "help.xml",
+            'collection' => "collection.xml",
+            'choice'     => "choice.xml",
+            'buttons'    => "buttons.xml",
+            'help'       => "help.xml",
         );
     }
 
