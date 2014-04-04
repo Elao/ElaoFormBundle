@@ -1,5 +1,4 @@
 {% extends "form_div_layout.html.twig" %}
-{% import "ElaoFormBundle::form_macro.html.twig" as form_macro %}
 
 {# Form root block #}
 
@@ -67,7 +66,7 @@
     {% endif %}
 
     id="{{ block('group_id') }}"
-    {{ form_macro.html_attributes(group_attr) }}
+    {{ _self.html_attributes(group_attr) }}
 {% endspaceless %}
 {% endblock %}
 
@@ -75,13 +74,13 @@
 
 {% block control_group_attributes %}
 {% spaceless %}
-    {{ form_macro.html_attributes(control_group_attr) }}
+    {{ _self.html_attributes(control_group_attr) }}
 {% endspaceless %}
 {% endblock control_group_attributes %}
 
 {% block label_group_attributes %}
 {% spaceless %}
-    {{ form_macro.html_attributes(label_group_attr) }}
+    {{ _self.html_attributes(label_group_attr) }}
 {% endspaceless %}
 {% endblock label_group_attributes %}
 
@@ -98,7 +97,7 @@
         {% if label is empty %}
             {% set label = name|humanize %}
         {% endif %}
-        <label{{ form_macro.html_attributes(label_attr) }}>
+        <label{{ _self.html_attributes(label_attr) }}>
             {{ label|trans({}, translation_domain)|raw }}
         </label>
     {% endif %}
@@ -150,15 +149,6 @@
 
 {% block box_row %}
 {% spaceless %}
-    {% if horizontal|default(false) %}
-        {% set label_columns = label_columns|default(3) %}
-        {% set widget_columns = widget_columns|default(12 - label_columns) %}
-        {% set group_attr = group_attr|default({})|merge({'class': (group_attr.class|default('') ~ ' ' ~ 'row')|trim }) %}
-
-        {% set control_group = true %}
-        {% set control_group_attr = control_group_attr|default({})|merge({'class': (control_group_attr.class|default('') ~ ' ' ~ control_group_class|default('col-lg-' ~ widget_columns ~ ' col-md-' ~ widget_columns ~ ' col-sm-' ~ widget_columns ~ ' col-lg-offset-' ~ label_columns ~ ' col-md-offset-' ~ label_columns ~ ' col-sm-offset-' ~ label_columns))|trim}) %}
-    {% endif %}
-
     <div {{ block('row_container_attributes') }}>
         {% if control_group|default(false) %}
             <div {{ block('control_group_attributes') }}>
@@ -191,7 +181,7 @@
 
 {% block choice_widget %}
 {% spaceless %}
-    {% set attr = attr|merge({'data-type': 'choice' ~ (expanded ? '-expanded' : '') ~ (multiple ? '-multiple' : '')}) %}
+    {% set attr = attr|merge({'data-choice': 'choice' ~ (expanded ? '-expanded' : '') ~ (multiple ? '-multiple' : '')}) %}
     {{ parent() }}
 {% endspaceless %}
 {% endblock choice_widget %}
@@ -264,11 +254,11 @@
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ collection_class)|trim }) %}
         {% set attr = attr|merge({'data-collection': prototype.vars.name }) %}
         {% if allow_add|default(false) %}
-            {% set attr = attr|merge({'data-add': block('collection_add_button_id') }) %}
+            {% set attr = attr|merge({'data-collection-add': block('collection_add_button_id') }) %}
         {% endif %}
         {% if allow_delete|default(false) %}
             {% set colection_delete_suffix = id %}
-            {% set attr = attr|merge({'data-delete': block('collection_delete_button_class') }) %}
+            {% set attr = attr|merge({'data-collection-delete': block('collection_delete_button_class') }) %}
         {% endif %}
     {% endif %}
 
@@ -295,7 +285,7 @@
     {% if form.parent.vars.allow_delete|default(false) %}
         {% set button_function = 'delete' %}
         {% set colection_delete_suffix = form.parent.vars.id %}
-        {% set button_attr = button_attr|default({})|merge({'data-delete': block('group_id')}) %}
+        {% set button_attr = button_attr|default({})|merge({'data-collection-delete': block('group_id')}) %}
         {% set button_attr = button_attr|merge({'class': (button_attr.class|default('') ~ ' ' ~ block('collection_delete_button_class'))|trim }) %}
         {% if form.parent.vars.label_delete is defined %}
         {% set button_label = form.parent.vars.label_delete %}
@@ -321,10 +311,16 @@
 {% spaceless %}
     {% set button_attr = button_attr|default({})|merge({id: block('collection_' ~ button_function ~ '_button_id')}) %}
     {% set button_attr = button_attr|default({})|merge({type: 'button'}) %}
-    {{ form_macro.html_attributes(button_attr) }}
+    {{ _self.html_attributes(button_attr) }}
 {% endspaceless %}
 {% endblock collection_button_attributes %}
 
 {% block collection_add_button_id id ~ '_add' %}
 {% block collection_delete_button_id id ~ '_delete' %}
 {% block collection_delete_button_class colection_delete_suffix ~ '_delete' %}
+
+{# Macros #}
+
+{% macro html_attributes(attributes) %}
+    {% for attrname, attrvalue in attributes %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+{% endmacro %}
