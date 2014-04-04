@@ -1,7 +1,7 @@
 [WIP] ElaoFormBundle
 ==============
 
-__Best server with [Elao/form.js](https://github.com/Elao/form.js)!__
+__Best served with [Elao/form.js](https://github.com/Elao/form.js)!__
 
 ## Installation:
 
