@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Elao\\Bundle\\FormBundle": "."
+            "Elao\\Bundle\\FormBundle\\": "."
         }
     },
     "extra": {
