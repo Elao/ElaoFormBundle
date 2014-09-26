@@ -23,7 +23,7 @@
         "symfony/framework-bundle": "~2.3"
     },
     "autoload": {
-        "psr-0": {
+        "psr-4": {
             "Elao\\Bundle\\FormBundle": "."
         }
     },
@@ -31,6 +31,5 @@
         "branch-alias": {
             "dev-master": "0.1.x-dev"
         }
-    },
-    "target-dir": "Elao/Bundle/FormBundle"
+    }
 }
