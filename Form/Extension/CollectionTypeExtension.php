@@ -35,7 +35,7 @@ class CollectionTypeExtension extends AbstractTypeExtension
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setOptional(array('min', 'max'));
+        $resolver->setDefined(array('min', 'max'));
         $resolver->setDefaults(
             array(
                 'label_add'    => 'Add',

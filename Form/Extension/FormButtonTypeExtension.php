@@ -33,7 +33,7 @@ class FormButtonTypeExtension extends AbstractTypeExtension
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setOptional(self::getButtons());
+        $resolver->setDefined(self::getButtons());
     }
 
     /**

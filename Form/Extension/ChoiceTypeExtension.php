@@ -13,7 +13,6 @@ namespace Elao\Bundle\FormBundle\Form\Extension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\AbstractTypeExtension;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Exention for the ChoiceType, provides:
