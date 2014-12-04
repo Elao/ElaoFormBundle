@@ -12,7 +12,7 @@ Add ElaoFormBundle to your `composer.json`:
 ``` json
 {
     "require": {
-        "elao/form-bundle": "0.1.*"
+        "elao/form-bundle": "0.2.*"
     }
 }
 ```
