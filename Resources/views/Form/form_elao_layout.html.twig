@@ -159,11 +159,7 @@
 
             {{ help and help_position == 'top' ? block('form_help') : '' }}
 
-            {% if label is sameas(false) %}
-                {{ form_widget(form) }}
-            {% else %}
-                {{ form_label(form, form_widget(form) ~ label|trans({}, translation_domain)) }}
-            {% endif %}
+            {{ block('box_widget') }}
 
             {{ form_errors(form) }}
             {{ block('collection_delete_button') }}
@@ -176,6 +172,14 @@
     </div>
 {% endspaceless %}
 {% endblock box_row %}
+
+{% block box_widget %}
+{% if label is sameas(false) %}
+    {{ form_widget(form) }}
+{% else %}
+    {{ form_label(form, form_widget(form) ~ label|trans({}, translation_domain), {label_attr: label_attr|default({})}) }}
+{% endif %}
+{% endblock box_widget %}
 
 {# Choice #}
 
