@@ -10,8 +10,10 @@
 
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
@@ -41,13 +43,16 @@ class FormButtonTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $buttons = self::getButtons();
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
+            $buttons = self::getButtons();
+            $form    = $event->getForm();
 
-        foreach ($buttons as $button) {
-            if (isset($options[$button]) && $options[$button] && !$builder->has($button)) {
-                $builder->add($button, $button);
+            foreach ($buttons as $button) {
+                if (isset($options[$button]) && $options[$button] && !$form->has($button)) {
+                    $form->add($button, $button);
+                }
             }
-        }
+        });
     }
 
     /**
