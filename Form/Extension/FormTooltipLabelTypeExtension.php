@@ -42,7 +42,7 @@ class FormTooltipLabelTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function finishView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if ($options['tooltip_label']) {
             $view->vars['tooltip_label'] = $options['tooltip_label'];

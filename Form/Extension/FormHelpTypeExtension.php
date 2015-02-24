@@ -40,7 +40,7 @@ class FormHelpTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function finishView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if ($options['help']) {
             $view->vars['help'] = $options['help'];
