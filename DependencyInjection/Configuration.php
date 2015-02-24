@@ -48,6 +48,10 @@ class Configuration implements ConfigurationInterface
                     ->info('<info>Activate the Label Tooltips feature</info>')
                     ->defaultTrue()
                 ->end()
+                ->booleanNode('placeholder')
+                    ->info('<info>Activate the Placeholder feature</info>')
+                    ->defaultTrue()
+                ->end()
             ->end();
 
         return $treeBuilder;

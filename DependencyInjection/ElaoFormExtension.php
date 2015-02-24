@@ -41,6 +41,7 @@ class ElaoFormExtension extends Extension
             'buttons'       => "buttons.xml",
             'help'          => "help.xml",
             'tooltip_label' => "tooltip_label.xml",
+            'placeholder'   => "placeholder.xml",
         );
     }
 
