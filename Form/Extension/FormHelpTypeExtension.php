@@ -12,12 +12,11 @@ namespace Elao\Bundle\FormBundle\Form\Extension;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Exention for the FormType, provides:
+ * Extension for the FormType, provides:
  * - Help option
  */
 class FormHelpTypeExtension extends AbstractTypeExtension

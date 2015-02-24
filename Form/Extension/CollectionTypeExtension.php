@@ -16,7 +16,7 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Exention for the CollectionType, provides:
+ * Extension for the CollectionType, provides:
  * - Label options for Add and Delete buttons
  * - Block prefixes for the collection and its items
  */

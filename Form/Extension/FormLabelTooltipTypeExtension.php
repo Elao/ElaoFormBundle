@@ -16,7 +16,8 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Extension for the FormType, provides a tooltip option
+ * Extension for the FormType, provides:
+ * - Label tooltip option + position
  */
 class FormLabelTooltipTypeExtension extends AbstractTypeExtension
 {
