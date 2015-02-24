@@ -34,10 +34,10 @@ class FormLabelTooltipTypeExtension extends AbstractTypeExtension
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(array(
             'label_tooltip'  => false,
             'label_position' => false,
-        ]);
+        ));
     }
 
     /**
