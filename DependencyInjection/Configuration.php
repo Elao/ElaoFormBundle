@@ -44,7 +44,7 @@ class Configuration implements ConfigurationInterface
                     ->info('<info>Activate the Help feature</info>')
                     ->defaultTrue()
                 ->end()
-                ->booleanNode('label_tooltip')
+                ->booleanNode('tooltip_label')
                     ->info('<info>Activate the Label Tooltips feature</info>')
                     ->defaultTrue()
                 ->end()

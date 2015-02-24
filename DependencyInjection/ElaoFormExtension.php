@@ -40,7 +40,7 @@ class ElaoFormExtension extends Extension
             'choice'        => "choice.xml",
             'buttons'       => "buttons.xml",
             'help'          => "help.xml",
-            'label_tooltip' => "label_tooltip.xml",
+            'tooltip_label' => "tooltip_label.xml",
         );
     }
 

@@ -16,10 +16,9 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Extension for the FormType, provides:
- * - Label tooltip option + position
+ * Extension for the FormType, provides a tooltip option
  */
-class FormLabelTooltipTypeExtension extends AbstractTypeExtension
+class FormTooltipLabelTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
@@ -34,10 +33,10 @@ class FormLabelTooltipTypeExtension extends AbstractTypeExtension
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
-            'label_tooltip'  => false,
-            'label_position' => false,
-        ));
+        $resolver->setDefaults([
+            'tooltip_label'    => false,
+            'tooltip_position' => false,
+        ]);
     }
 
     /**
@@ -45,11 +44,11 @@ class FormLabelTooltipTypeExtension extends AbstractTypeExtension
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
-        if ($options['label_tooltip']) {
-            $view->vars['label_tooltip'] = $options['label_tooltip'];
+        if ($options['tooltip_label']) {
+            $view->vars['tooltip_label'] = $options['tooltip_label'];
         }
-        if ($options['label_position']) {
-            $view->vars['label_position'] = $options['label_position'];
+        if ($options['tooltip_position']) {
+            $view->vars['tooltip_position'] = $options['tooltip_position'];
         }
     }
 }
