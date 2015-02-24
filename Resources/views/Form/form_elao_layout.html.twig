@@ -95,7 +95,7 @@
             {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
         {% endif %}
         {% if tooltip_label|default(false) %}
-            {% set label_attr = label_attr|merge({'data-toggle': 'tooltip', 'data-placement': tooltip_position|default('top'), 'data-original-title': tooltip_label|trans|raw|trim, 'class': (label_attr.class|default('') ~ ' label-tooltip')|trim}) %}
+            {% set label_attr = label_attr|merge({'title': tooltip_label|trans|raw|trim}) %}
         {% endif %}
         {% if label is empty %}
             {% set label = name|humanize %}

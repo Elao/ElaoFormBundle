@@ -12,6 +12,7 @@ namespace Elao\Bundle\FormBundle\Form\Extension;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
@@ -34,8 +35,7 @@ class FormTooltipLabelTypeExtension extends AbstractTypeExtension
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'tooltip_label'    => false,
-            'tooltip_position' => false,
+            'tooltip_label' => false,
         ]);
     }
 
@@ -46,9 +46,6 @@ class FormTooltipLabelTypeExtension extends AbstractTypeExtension
     {
         if ($options['tooltip_label']) {
             $view->vars['tooltip_label'] = $options['tooltip_label'];
-        }
-        if ($options['tooltip_position']) {
-            $view->vars['tooltip_position'] = $options['tooltip_position'];
         }
     }
 }
