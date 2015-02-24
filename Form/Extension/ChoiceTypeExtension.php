@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\AbstractTypeExtension;
 
 /**
- * Exention for the ChoiceType, provides:
+ * Extension for the ChoiceType, provides:
  * - Block prefixes for the choice items
  */
 class ChoiceTypeExtension extends AbstractTypeExtension

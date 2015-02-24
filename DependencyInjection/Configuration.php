@@ -44,6 +44,10 @@ class Configuration implements ConfigurationInterface
                     ->info('<info>Activate the Help feature</info>')
                     ->defaultTrue()
                 ->end()
+                ->booleanNode('tooltip_label')
+                    ->info('<info>Activate the Label Tooltips feature</info>')
+                    ->defaultTrue()
+                ->end()
             ->end();
 
         return $treeBuilder;

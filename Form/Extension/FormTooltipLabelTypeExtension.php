@@ -12,14 +12,14 @@ namespace Elao\Bundle\FormBundle\Form\Extension;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Extension for the FormType, provides:
- * - Help option
+ * Extension for the FormType, provides a tooltip option
  */
-class FormHelpTypeExtension extends AbstractTypeExtension
+class FormTooltipLabelTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
@@ -34,7 +34,9 @@ class FormHelpTypeExtension extends AbstractTypeExtension
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array('help' => false));
+        $resolver->setDefaults([
+            'tooltip_label' => false,
+        ]);
     }
 
     /**
@@ -42,8 +44,8 @@ class FormHelpTypeExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if ($options['help']) {
-            $view->vars['help'] = $options['help'];
+        if ($options['tooltip_label']) {
+            $view->vars['tooltip_label'] = $options['tooltip_label'];
         }
     }
 }

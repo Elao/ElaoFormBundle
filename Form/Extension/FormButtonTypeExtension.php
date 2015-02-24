@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Exention for the FormType, provides:
+ * Extension for the FormType, provides:
  * - Submit and Reset buttons
  */
 class FormButtonTypeExtension extends AbstractTypeExtension
