@@ -25,7 +25,7 @@ class FormPlaceholderTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'form';
+        return 'text';
     }
 
     /**
