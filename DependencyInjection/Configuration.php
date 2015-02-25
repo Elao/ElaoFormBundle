@@ -52,6 +52,10 @@ class Configuration implements ConfigurationInterface
                     ->info('<info>Activate the Placeholder feature</info>')
                     ->defaultTrue()
                 ->end()
+                ->booleanNode('confirm')
+                    ->info('<info>Activate the Confirm feature</info>')
+                    ->defaultTrue()
+                ->end()
             ->end();
 
         return $treeBuilder;
