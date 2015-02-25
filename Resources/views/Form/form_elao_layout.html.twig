@@ -262,6 +262,13 @@
 {% endspaceless %}
 {% endblock button_row %}
 
+{% block button_attributes %}
+    {{ parent() }}
+    {% if confirm|default(false) %}
+        data-confirm="{{ confirm|trans|raw }}"
+    {% endif %}
+{% endblock button_attributes %}
+
 {# Collections #}
 
 {% block collection_widget %}

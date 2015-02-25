@@ -42,6 +42,7 @@ class ElaoFormExtension extends Extension
             'help'          => "help.xml",
             'tooltip_label' => "tooltip_label.xml",
             'placeholder'   => "placeholder.xml",
+            'confirm'       => "confirm.xml",
         );
     }
 
