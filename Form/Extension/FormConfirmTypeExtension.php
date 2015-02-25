@@ -39,9 +39,8 @@ class FormConfirmTypeExtension extends AbstractTypeExtension
     /**
      * {@inheritdoc}
      */
-    public function finishView(FormView $view, FormInterface $form, array $options)
+    public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        var_dump($options['confirm']);
         if ($options['confirm']) {
             $view->vars['confirm'] = $options['confirm'];
         }
