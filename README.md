@@ -1,4 +1,4 @@
-[WIP] ElaoFormBundle
+ElaoFormBundle
 ==============
 
 __Best served with [Elao/form.js](https://github.com/Elao/form.js)!__
