@@ -249,7 +249,7 @@
 {% block form_help %}
     {% if help|default(false) %}
         <p class="{{ help_class|default('help') }}">
-            {{ help|trans({}, translation_domain) }}
+            {{ help|trans({}, translation_domain)|raw }}
         </p>
     {% endif %}
 {% endblock %}
