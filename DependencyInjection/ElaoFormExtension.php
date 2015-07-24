@@ -43,6 +43,7 @@ class ElaoFormExtension extends Extension
             'tooltip_label' => 'tooltip_label.xml',
             'placeholder'   => 'placeholder.xml',
             'confirm'       => 'confirm.xml',
+            'autofocus'     => 'autofocus.xml',
         );
     }
 

@@ -56,6 +56,10 @@ class Configuration implements ConfigurationInterface
                     ->info('<info>Activate the Confirm feature</info>')
                     ->defaultTrue()
                 ->end()
+                ->booleanNode('autofocus')
+                    ->info('<info>Activate the Autofocus feature</info>')
+                    ->defaultTrue()
+                ->end()
             ->end();
 
         return $treeBuilder;
