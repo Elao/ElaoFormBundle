@@ -207,7 +207,7 @@
     <{{ tag }} {{ block('widget_container_attributes') }}>
     {% for child in form %}
         {{ form_widget(child) }}
-        {{ form_label(child) }}
+        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
     {% endfor %}
     </{{ tag }}>
 {% endspaceless %}
@@ -217,7 +217,7 @@
 {% spaceless %}
     {% for group_label, choice in options %}
         {% if choice is iterable %}
-            <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+            <optgroup label="{{ choice_translation_domain is sameas(false) ? group_label : group_label|trans({}, choice_translation_domain) }}">
                 {% set options = choice %}
                 {{ block('choice_widget_options') }}
             </optgroup>
@@ -231,7 +231,7 @@
 {% endblock choice_widget_options %}
 
 {% block choice_widget_options_label %}
-    {{ choice.label|trans({}, translation_domain) }}
+    {{ choice_translation_domain is sameas(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
 {% endblock %}
 
 {% block choice_widget_options_attributes %}
