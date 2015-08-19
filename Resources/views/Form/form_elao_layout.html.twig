@@ -3,7 +3,7 @@
 {# Form root block #}
 
 {% block form_start %}
-	{% set form_class = form_class|default('form') %}
+    {% set form_class = form_class|default('form') %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ form_class)|trim  }) %}
     {{ parent() }}
 {% endblock form_start %}
@@ -60,7 +60,7 @@
     {% set group_class = group_class|default('group') %}
     {% set group_attr  = group_attr|default({})|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_class)|trim }) %}
 
-	{% if errors|length > 0 %}
+    {% if errors|length > 0 %}
         {% set group_error_class = group_error_class|default('errors') %}
         {% set group_attr        = group_attr|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_error_class)|trim }) %}
     {% endif %}
@@ -142,9 +142,9 @@
 
 {% block textarea_widget %}
 {% spaceless %}
-	{% set control_class = control_class|default('input') %}
+    {% set control_class = control_class|default('input') %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
-	{{ parent() }}
+    {{ parent() }}
 {% endspaceless %}
 {% endblock textarea_widget %}
 
@@ -195,9 +195,9 @@
 
 {% block choice_widget_collapsed %}
 {% spaceless %}
-	{% set control_class = control_class|default('input') %}
+    {% set control_class = control_class|default('input') %}
     {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
-	{{ parent() }}
+    {{ parent() }}
 {% endspaceless %}
 {% endblock choice_widget_collapsed %}
 
@@ -207,7 +207,7 @@
     <{{ tag }} {{ block('widget_container_attributes') }}>
     {% for child in form %}
         {{ form_widget(child) }}
-        {{ form_label(child) }}
+        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
     {% endfor %}
     </{{ tag }}>
 {% endspaceless %}
@@ -217,7 +217,7 @@
 {% spaceless %}
     {% for group_label, choice in options %}
         {% if choice is iterable %}
-            <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+            <optgroup label="{{ choice_translation_domain is sameas(false) ? group_label : group_label|trans({}, choice_translation_domain) }}">
                 {% set options = choice %}
                 {{ block('choice_widget_options') }}
             </optgroup>
@@ -231,7 +231,7 @@
 {% endblock choice_widget_options %}
 
 {% block choice_widget_options_label %}
-    {{ choice.label|trans({}, translation_domain) }}
+    {{ choice_translation_domain is sameas(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
 {% endblock %}
 
 {% block choice_widget_options_attributes %}
