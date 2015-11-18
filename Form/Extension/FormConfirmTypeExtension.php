@@ -10,6 +10,8 @@
 
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -25,7 +27,7 @@ class FormConfirmTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'button';
+        return method_exists(AbstractType::class, 'getBlockPrefix') ? ButtonType::class: 'button';
     }
 
     /**

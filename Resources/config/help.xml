@@ -10,7 +10,7 @@
 
     <services>
         <service id="elao.form.extension.form_help_type_extension" class="%elao.form.extension.form_help_type_extension.class%">
-            <tag name="form.type_extension" alias="form" />
+            <tag name="form.type_extension" alias="form" extended_type="Symfony\Component\Form\Extension\Core\Type\FormType" />
         </service>
     </services>
 </container>

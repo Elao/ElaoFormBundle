@@ -10,6 +10,8 @@
 
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -25,7 +27,7 @@ class ChoiceTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'choice';
+        return method_exists(AbstractType::class, 'getBlockPrefix') ? ChoiceType::class: 'choice';
     }
 
     /**

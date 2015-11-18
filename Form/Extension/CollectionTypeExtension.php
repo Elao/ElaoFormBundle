@@ -10,6 +10,8 @@
 
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -27,7 +29,7 @@ class CollectionTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'collection';
+        return method_exists(AbstractType::class, 'getBlockPrefix') ? CollectionType::class: 'collection';
     }
 
     /**
@@ -55,7 +57,6 @@ class CollectionTypeExtension extends AbstractTypeExtension
         }
 
         if ($options['allow_add'] && $options['prototype']) {
-
             $view->vars['prototype']->vars['block_prefixes'][] = 'collection_item';
             $view->vars['prototype']->vars['block_prefixes'][] = $form->getName() . '_item';
 
