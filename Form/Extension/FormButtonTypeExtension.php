@@ -13,6 +13,8 @@ namespace Elao\Bundle\FormBundle\Form\Extension;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -49,9 +51,9 @@ class FormButtonTypeExtension extends AbstractTypeExtension
             $buttons = self::getButtons();
             $form    = $event->getForm();
 
-            foreach ($buttons as $button) {
+            foreach ($buttons as $class => $button) {
                 if (isset($options[$button]) && $options[$button] && !$form->has($button)) {
-                    $form->add($button, $button);
+                    $form->add($button, method_exists(AbstractType::class, 'getBlockPrefix') ? $class : $button);
                 }
             }
         });
@@ -64,6 +66,6 @@ class FormButtonTypeExtension extends AbstractTypeExtension
      */
     private static function getButtons()
     {
-        return array('submit', 'reset');
+        return array(SubmitType::class => 'submit', ResetType::class => 'reset');
     }
 }
