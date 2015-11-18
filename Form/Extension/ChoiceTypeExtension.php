@@ -37,7 +37,11 @@ class ChoiceTypeExtension extends AbstractTypeExtension
     {
         foreach ($view as $child) {
             $child->vars['block_prefixes'][] = 'choice_item';
-            $child->vars['block_prefixes'][] = $form->getName() . '_item';
+
+            $blockPrefix = $form->getName() . '_item';
+            if (!in_array($blockPrefix, $child->vars['block_prefixes'])) {
+                $child->vars['block_prefixes'][] = $blockPrefix;
+            }
         }
     }
 }
