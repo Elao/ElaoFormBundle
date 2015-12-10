@@ -10,11 +10,9 @@
 
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -27,7 +25,7 @@ class FormPlaceholderTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return method_exists(AbstractType::class, 'getBlockPrefix') ? TextType::class: 'text';
+        return TextType::class;
     }
 
     /**

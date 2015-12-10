@@ -10,11 +10,9 @@
 
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -28,7 +26,7 @@ class FormHelpTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return method_exists(AbstractType::class, 'getBlockPrefix') ? FormType::class: 'form';
+        return FormType::class;
     }
 
     /**
@@ -36,7 +34,7 @@ class FormHelpTypeExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array('help' => false));
+        $resolver->setDefaults(['help' => false]);
     }
 
     /**

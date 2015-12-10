@@ -10,7 +10,7 @@
 
     <services>
         <service id="elao.form.extension.collection_type_extension" class="%elao.form.extension.collection_type_extension.class%">
-            <tag name="form.type_extension" alias="collection" extended_type="Symfony\Component\Form\Extension\Core\Type\CollectionType" />
+            <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\CollectionType" />
         </service>
     </services>
 </container>
