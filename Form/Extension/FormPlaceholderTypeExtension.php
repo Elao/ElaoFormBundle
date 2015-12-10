@@ -42,7 +42,8 @@ class FormPlaceholderTypeExtension extends AbstractTypeExtension
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if ($options['placeholder']) {
-            $view->vars['attr']['placeholder'] = isset($view->vars['placeholder']) ? $view->vars['placeholder'] : $options['placeholder'];
+            $placeholder = isset($view->vars['placeholder']) ? $view->vars['placeholder'] : $options['placeholder'];
+            $view->vars['attr']['placeholder'] = $placeholder;
         }
     }
 }
