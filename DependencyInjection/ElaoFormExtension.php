@@ -28,24 +28,16 @@ class ElaoFormExtension extends Extension
      *
      * @var array
      */
-    private $features;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->features = array(
-            'collection'    => 'collection.xml',
-            'choice'        => 'choice.xml',
-            'buttons'       => 'buttons.xml',
-            'help'          => 'help.xml',
-            'tooltip_label' => 'tooltip_label.xml',
-            'placeholder'   => 'placeholder.xml',
-            'confirm'       => 'confirm.xml',
-            'autofocus'     => 'autofocus.xml',
-        );
-    }
+    private static $features = [
+        'collection'    => 'collection.xml',
+        'choice'        => 'choice.xml',
+        'buttons'       => 'buttons.xml',
+        'help'          => 'help.xml',
+        'tooltip_label' => 'tooltip_label.xml',
+        'placeholder'   => 'placeholder.xml',
+        'confirm'       => 'confirm.xml',
+        'autofocus'     => 'autofocus.xml',
+    ];
 
     /**
      * {@inheritDoc}
@@ -56,7 +48,7 @@ class ElaoFormExtension extends Extension
         $config        = $this->processConfiguration($configuration, $configs);
         $loader        = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach ($this->features as $option => $xml) {
+        foreach (self::$features as $option => $xml) {
             if ($config[$option]) {
                 $loader->load($xml);
             }

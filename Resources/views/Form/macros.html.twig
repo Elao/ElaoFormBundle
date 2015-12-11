@@ -1,0 +1,5 @@
+{# Macros #}
+
+{% macro html_attributes(attributes) %}
+    {% for attrname, attrvalue in attributes %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
+{% endmacro %}

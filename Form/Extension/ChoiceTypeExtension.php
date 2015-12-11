@@ -10,9 +10,9 @@
 
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\AbstractTypeExtension;
 
 /**
  * Extension for the ChoiceType, provides:
@@ -25,7 +25,7 @@ class ChoiceTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
@@ -34,8 +34,8 @@ class ChoiceTypeExtension extends AbstractTypeExtension
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach ($view as $child) {
-            $child->vars['block_prefixes'][] = 'choice_item';
-            $child->vars['block_prefixes'][] = $form->getName() . '_item';
+            $this->addBlockPrefix($view, 'choice_item');
+            $this->addBlockPrefix($view, $form->getName() . '_item');
         }
     }
 }

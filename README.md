@@ -1,4 +1,4 @@
-ElaoFormBundle
+ElaoFormBundle ![](https://img.shields.io/badge/Symfony-3.0-blue.svg)
 ==============
 
 __Best served with [Elao/form.js](https://github.com/Elao/form.js)!__
@@ -45,9 +45,8 @@ Use the provided form template, globally:
 ``` yaml
 # Twig Configuration
 twig:
-    form:
-        resources:
-            - "ElaoFormBundle:Form:form_elao_layout.html.twig"
+    form_themes:
+        - "ElaoFormBundle:Form:form_elao_layout.html.twig"
 ```
 
 Or on a specific form:
@@ -73,7 +72,7 @@ Help:
 Provide an `help` option that automatically adds an help block to the field.
 Use as below:
 
-	$builder->add('email', 'email', array('help' => "A valid email address"));
+	$builder->add('email', EmailType::class, array('help' => "A valid email address"));
 
 _Note:_ The `help` string is gonna be translated by default just like the label of the field.
 
@@ -83,5 +82,5 @@ Buttons:
 Provide sortcut for adding submit and reset buttons:
 All form have now an optional option "submit" and "reset", setting it to true adds a default submit/reset button
 
-	$form = $this->createForm('post', $post, array('submit' => true, 'reset' => true));
+	$form = $this->createForm(PostType::class, $post, array('submit' => true, 'reset' => true));
 

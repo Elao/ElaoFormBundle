@@ -10,9 +10,9 @@
 
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -27,7 +27,7 @@ class CollectionTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'collection';
+        return CollectionType::class;
     }
 
     /**
@@ -35,13 +35,11 @@ class CollectionTypeExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefined(array('min', 'max'));
-        $resolver->setDefaults(
-            array(
-                'label_add'    => 'Add',
-                'label_delete' => 'Delete',
-            )
-        );
+        $resolver->setDefined(['min', 'max']);
+        $resolver->setDefaults([
+            'label_add'    => 'Add',
+            'label_delete' => 'Delete',
+        ]);
     }
 
     /**
@@ -50,17 +48,17 @@ class CollectionTypeExtension extends AbstractTypeExtension
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach ($view as $child) {
-            $child->vars['block_prefixes'][] = 'collection_item';
-            $child->vars['block_prefixes'][] = $form->getName() . '_item';
+            $this->addBlockPrefix($view, 'collection_item');
+            $this->addBlockPrefix($view, $form->getName() . '_item');
         }
 
         if ($options['allow_add'] && $options['prototype']) {
+            $prototype = $view->vars['prototype'];
+            $this->addBlockPrefix($prototype, 'collection_item');
+            $this->addBlockPrefix($prototype, $form->getName() . '_item');
 
-            $view->vars['prototype']->vars['block_prefixes'][] = 'collection_item';
-            $view->vars['prototype']->vars['block_prefixes'][] = $form->getName() . '_item';
-
-            if ($view->vars['prototype']->vars['label'] == $options['prototype_name'].'label__') {
-                $view->vars['prototype']->vars['label'] = $options['label'];
+            if ($prototype->vars['label'] == $options['prototype_name'].'label__') {
+                $prototype->vars['label'] = $options['label'];
                 $options['options']['label'] = $options['label'];
             }
         }

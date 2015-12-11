@@ -10,7 +10,7 @@
 
     <services>
         <service id="elao.form.extension.form_placeholder_type_extension" class="%elao.form.extension.form_placeholder_type_extension.class%">
-            <tag name="form.type_extension" alias="text" />
+            <tag name="form.type_extension" extended_type="Symfony\Component\Form\Extension\Core\Type\TextType" />
         </service>
     </services>
 </container>

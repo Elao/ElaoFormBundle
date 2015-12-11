@@ -20,7 +20,7 @@
 {% else %}
     <div {{ block('row_container_attributes') }}>
 
-        {% if label is not sameas(false) %}
+        {% if label is not same as(false) %}
             {% if label_group|default(false) %}
                 <div {{ block('label_group_attributes') }}>
             {% endif %}
@@ -56,6 +56,7 @@
 {% endblock form_row %}
 
 {% block row_container_attributes %}
+{% import "ElaoFormBundle:Form:macros.html.twig" as macros %}
 {% spaceless %}
     {% set group_class = group_class|default('group') %}
     {% set group_attr  = group_attr|default({})|merge({'class': (group_attr.class|default('') ~ ' ' ~ group_class)|trim }) %}
@@ -66,30 +67,33 @@
     {% endif %}
 
     id="{{ block('group_id') }}"
-    {{ _self.html_attributes(group_attr) }}
+    {{ macros.html_attributes(group_attr) }}
 {% endspaceless %}
 {% endblock %}
 
 {% block group_id id ~ '-group' %}
 
 {% block control_group_attributes %}
+{% import "ElaoFormBundle:Form:macros.html.twig" as macros %}
 {% spaceless %}
-    {{ _self.html_attributes(control_group_attr) }}
+    {{ macros.html_attributes(control_group_attr) }}
 {% endspaceless %}
 {% endblock control_group_attributes %}
 
 {% block label_group_attributes %}
+{% import "ElaoFormBundle:Form:macros.html.twig" as macros %}
 {% spaceless %}
-    {{ _self.html_attributes(label_group_attr) }}
+    {{ macros.html_attributes(label_group_attr) }}
 {% endspaceless %}
 {% endblock label_group_attributes %}
 
 {# Form label #}
 
 {% block form_label %}
+{% import "ElaoFormBundle:Form:macros.html.twig" as macros %}
 {% spaceless %}
     {% set label_attr = label_attr|default({})|merge({'class': (label_attr.class|default('') ~ ' ' ~ label_class|default('label'))|trim}) %}
-    {% if label is not sameas(false) %}
+    {% if label is not same as(false) %}
         {% set label_attr = label_attr|merge({'for': id}) %}
         {% if required %}
             {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
@@ -100,7 +104,7 @@
         {% if label is empty %}
             {% set label = name|humanize %}
         {% endif %}
-        <label{{ _self.html_attributes(label_attr) }}>
+        <label{{ macros.html_attributes(label_attr) }}>
             {{ label|trans({}, translation_domain)|raw }}
         </label>
     {% endif %}
@@ -111,7 +115,7 @@
 
 {% block form_widget %}
 {% spaceless %}
-    {% if not compound or expanded|default(true) is sameas(false) %}
+    {% if not compound or expanded|default(true) is same as(false) %}
         {% set control_class = control_class|default('input') %}
         {% set attr = attr|merge({'class': (attr.class|default('') ~ ' ' ~ control_class)|trim }) %}
     {% endif %}
@@ -177,7 +181,7 @@
 {% endblock box_row %}
 
 {% block box_widget %}
-{% if label is sameas(false) %}
+{% if label is same as(false) %}
     {{ form_widget(form) }}
 {% else %}
     {{ form_label(form, form_widget(form) ~ label|trans({}, translation_domain), {label_attr: label_attr|default({})}) }}
@@ -217,7 +221,7 @@
 {% spaceless %}
     {% for group_label, choice in options %}
         {% if choice is iterable %}
-            <optgroup label="{{ choice_translation_domain is sameas(false) ? group_label : group_label|trans({}, choice_translation_domain) }}">
+            <optgroup label="{{ choice_translation_domain is same as(false) ? group_label : group_label|trans({}, choice_translation_domain) }}">
                 {% set options = choice %}
                 {{ block('choice_widget_options') }}
             </optgroup>
@@ -231,17 +235,18 @@
 {% endblock choice_widget_options %}
 
 {% block choice_widget_options_label %}
-    {{ choice_translation_domain is sameas(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
+    {{ choice_translation_domain is same as(false) ? choice.label : choice.label|trans({}, choice_translation_domain) }}
 {% endblock %}
 
 {% block choice_widget_options_attributes %}
+{% import "ElaoFormBundle:Form:macros.html.twig" as macros %}
     {% set choice_attr = choice.attr|default({})|merge({value: choice.value}) %}
 
     {% if choice is selectedchoice(value) %}
         {% set choice_attr = choice_attr|merge({selected: 'selected'}) %}
     {% endif %}
 
-    {{ _self.html_attributes(choice_attr) }}
+    {{ macros.html_attributes(choice_attr) }}
 {% endblock %}
 
 {# Help block #}
@@ -332,19 +337,14 @@
 {% endblock collection_button %}
 
 {% block collection_button_attributes %}
+{% import "ElaoFormBundle:Form:macros.html.twig" as macros %}
 {% spaceless %}
     {% set button_attr = button_attr|default({})|merge({id: block('collection_' ~ button_function ~ '_button_id')}) %}
     {% set button_attr = button_attr|default({})|merge({type: 'button'}) %}
-    {{ _self.html_attributes(button_attr) }}
+    {{ macros.html_attributes(button_attr) }}
 {% endspaceless %}
 {% endblock collection_button_attributes %}
 
 {% block collection_add_button_id id ~ '_add' %}
 {% block collection_delete_button_id id ~ '_delete' %}
 {% block collection_delete_button_class colection_delete_suffix ~ '_delete' %}
-
-{# Macros #}
-
-{% macro html_attributes(attributes) %}
-    {% for attrname, attrvalue in attributes %}{{ attrname }}="{{ attrvalue }}" {% endfor %}
-{% endmacro %}

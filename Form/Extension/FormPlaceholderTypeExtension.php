@@ -10,9 +10,9 @@
 
 namespace Elao\Bundle\FormBundle\Form\Extension;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -25,7 +25,7 @@ class FormPlaceholderTypeExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'text';
+        return TextType::class;
     }
 
     /**
@@ -42,7 +42,8 @@ class FormPlaceholderTypeExtension extends AbstractTypeExtension
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if ($options['placeholder']) {
-            $view->vars['attr']['placeholder'] = isset($view->vars['placeholder']) ? $view->vars['placeholder'] : $options['placeholder'];
+            $placeholder = isset($view->vars['placeholder']) ? $view->vars['placeholder'] : $options['placeholder'];
+            $view->vars['attr']['placeholder'] = $placeholder;
         }
     }
 }
