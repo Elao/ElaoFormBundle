@@ -1,4 +1,4 @@
-[WIP] ElaoFormBundle
+ElaoFormBundle ![](https://img.shields.io/badge/Symfony-2.3-blue.svg)
 ==============
 
 __Best served with [Elao/form.js](https://github.com/Elao/form.js)!__
