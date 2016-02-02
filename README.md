@@ -9,18 +9,8 @@ Tools & enhancements for Symfony 2 forms
 
 Add ElaoFormBundle to your `composer.json`:
 
-``` json
-{
-    "require": {
-        "elao/form-bundle": "~1.0"
-    }
-}
-```
-
-Now download the bundle by running the command:
-
 ``` bash
-$ php composer.phar update elao/form-bundle
+$ composer require "elao/form-bundle":"~2.0"
 ```
 
 Enable the bundle in the kernel:
