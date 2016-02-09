@@ -48,8 +48,8 @@ class CollectionTypeExtension extends AbstractTypeExtension
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
         foreach ($view as $child) {
-            $this->addBlockPrefix($view, 'collection_item');
-            $this->addBlockPrefix($view, $form->getName() . '_item');
+            $this->addBlockPrefix($child, 'collection_item');
+            $this->addBlockPrefix($child, $form->getName() . '_item');
         }
 
         if ($options['allow_add'] && $options['prototype']) {
