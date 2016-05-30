@@ -10,7 +10,7 @@ Tools & enhancements for Symfony 2 forms
 Add ElaoFormBundle to your `composer.json`:
 
 ``` bash
-$ composer require "elao/form-bundle":"~2.0"
+$ composer require "elao/form-bundle":"~2.1"
 ```
 
 Enable the bundle in the kernel:
