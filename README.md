@@ -36,13 +36,13 @@ Use the provided form template, globally:
 # Twig Configuration
 twig:
     form_themes:
-        - "ElaoFormBundle:Form:form_elao_layout.html.twig"
+        - "@ElaoForm/Form/form_elao_layout.html.twig"
 ```
 
 Or on a specific form:
 
 ``` twig
-{% form_theme form 'ElaoFormBundle:Form:form_elao_layout.html.twig' %}
+{% form_theme form '@ElaoForm/Form/form_elao_layout.html.twig' %}
 ```
 
 ## Features:
@@ -73,4 +73,3 @@ Provide sortcut for adding submit and reset buttons:
 All form have now an optional option "submit" and "reset", setting it to true adds a default submit/reset button
 
 	$form = $this->createForm(PostType::class, $post, array('submit' => true, 'reset' => true));
-
